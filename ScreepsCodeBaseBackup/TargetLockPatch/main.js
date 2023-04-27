@@ -35,13 +35,14 @@ module.exports.loop = function () {
         if(closestHostile) {
             tower.attack(closestHostile);
         }
-        
+        /*
         var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {return ((structure.structureType != STRUCTURE_WALL && structure.hits < structure.hitsMax) || (structure.structureType == STRUCTURE_WALL && structure.hits < 6000))}
         });
         if(closestDamagedStructure) {
             tower.repair(closestDamagedStructure);
         }
+        */
     }
     
     if(Memory.pathPlotted != true)
@@ -61,8 +62,16 @@ module.exports.loop = function () {
     if(freeSlot != 0)
     {
         var newName = 'HarvX' + freeSlot.x + "Y"+ freeSlot.y;
-        Game.spawns['Spawn1'].spawnCreep(bodyComps.HARV, newName,
-            { memory: { role: 'harvester', harvest: true, targetSlot: freeSlot} });
+        if(Game.creeps.length == 0)
+        {
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName,
+                { memory: { role: 'harvester', harvest: true, targetSlot: freeSlot} });
+        }
+        else
+        {
+            Game.spawns['Spawn1'].spawnCreep(bodyComps.HARV, newName,
+                { memory: { role: 'harvester', harvest: true, targetSlot: freeSlot} });
+        }
     }
     
     //Check the current number of scouts and spawn more if under determined number

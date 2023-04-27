@@ -1,8 +1,8 @@
 var bodyComps = {
-    HARV: [WORK, CARRY, MOVE],
-    BUILDER: [WORK, CARRY, MOVE], 
-    UPPER: [WORK, CARRY, MOVE],
-    SCAV: [CARRY,  MOVE]
+    HARV: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
+    BUILDER: [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE], 
+    UPPER: [WORK, WORK, CARRY, MOVE],
+    SCAV: [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE]
 }
 
 module.exports = bodyComps;
