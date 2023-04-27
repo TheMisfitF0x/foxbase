@@ -9,6 +9,7 @@ var tickConverter = require('action.tickConverter');
 var slotFinder = require('action.findHarvSlots');
 var bodyComps = require('settings.bodyComps');
 //If I do something in an IDE and commit, do it work?
+//What if I no replace?
 module.exports.loop = function () {
 
     targeter.updateFlags();
