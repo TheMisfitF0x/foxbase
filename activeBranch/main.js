@@ -45,9 +45,11 @@ module.exports.loop = function () {
     var harvs = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     if (harvs.length < Game.spawns["Spawn1"].room.find(FIND_SOURCES).length) {
         var newName = 'Harv' + Game.time;
-        console.log('Spawning new harv: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(bodyComps.HARV, newName,
-            { memory: { role: 'harvester'} });
+        if(Game.spawns['Spawn1'].spawnCreep(bodyComps.HARV, newName,
+            { memory: { role: 'harvester'} }) == OK)
+            {
+                console.log('Spawning new harv: ' + newName);
+            }
     }
     
     if (Game.spawns['Spawn1'].spawning) {
