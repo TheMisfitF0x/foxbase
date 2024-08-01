@@ -75,7 +75,8 @@ module.exports.loop = function () {
                 roleWorker.run(creep);
                 break;
             default:
-                commandParser.intakeCommand(creep);
+                commandParser.IntakeCommand(creep);
+                break;
         } 
     }
 }
