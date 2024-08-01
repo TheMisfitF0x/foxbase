@@ -75,7 +75,7 @@ module.exports.loop = function () {
                 roleWorker.run(creep);
                 break;
             default:
-                commandParser.IntakeCommand(creep);
+                commandParser.IntakeCommand(creep, new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
                 break;
         } 
     }

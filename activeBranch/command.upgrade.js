@@ -1,11 +1,11 @@
 const Command = require('command.base');
 
-
+//TODO Rewrite parameters
 class UpgradeCommand extends Command
 {
-    constructor(commanderName, commandType, sourceID, isPostUpgrade, homeSpawnID)
+    constructor(commanderName, sourceID, isPostUpgrade, homeSpawnID)
     {
-        super(commanderName, commandType);
+        super(commanderName, "upgrade");
         //TODO: body script
     }
 }

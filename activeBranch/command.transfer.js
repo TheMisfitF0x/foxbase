@@ -1,14 +1,15 @@
-var commandBase = require("command.base")
-//TODO: Convert to subclass
-function TransferCommand(commanderName, commandType, collectFromID, returnToID, isOneWay)
-{
-    commandBase.call(this, commanderName, commandType)
-    this.collectFromID = collectFromID;
-    this.returnToID = returnToID;
-    this.isOneWay = isOneWay;
-}
+const Command = require("command.base")
 
-TransferCommand.prototype = Object.create(commandBase.prototype); 
-TransferCommand.prototype.constructor = TransferCommand;
+//TODO Rewrite parameters
+class TransferCommand extends Command
+{
+    constructor(commanderName, collectFromID, returnToID, isOneWay)
+    {
+        super(commanderName, "transfer")
+        this.collectFromID = collectFromID;
+        this.returnToID = returnToID;
+        this.isOneWay = isOneWay;
+    }
+}
  
-module.exports.commandTransfer = transferCommand;
+module.exports = TransferCommand;
