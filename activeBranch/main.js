@@ -1,7 +1,4 @@
 var roleHarvester = require('role.harvester');
-var roleWorker = require('role.worker');
-var roleScout = require('role.scout');
-var roleScav = require('role.scavenger');
 var bodyComps = require('settings.bodyComps');
 var commandParser = require('creepBehavior.CommandParser');
 var HarvestCommand = require('command.harvest');
@@ -44,8 +41,6 @@ module.exports.loop = function () {
         }
         Memory.pathPlotted = true;   
     }
-
-    
     
     var harvs = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     if (harvs.length < Game.spawns["Spawn1"].room.find(FIND_SOURCES).length) {
@@ -55,46 +50,6 @@ module.exports.loop = function () {
             { memory: { role: 'harvester'} });
     }
     
-    //Check the current number of scouts and spawn more if under determined number
-    var scouts = _.filter(Game.creeps, (creep) => creep.memory.role == 'scout');
-    if (scouts.length < 0) {
-        var newName = 'Scout' + Game.time;
-        console.log('Spawning new scout: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, ATTACK ,ATTACK], newName,
-            { memory: { role: 'scout'} });
-    }
-    
-    //Check the current number of scouts and spawn more if under determined number
-    var scavengers = _.filter(Game.creeps, (creep) => creep.memory.role == 'scavenger');
-    if (scavengers.length < 0) {
-        var newName = 'Scav' + Game.time;
-        console.log('Spawning new scav: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(bodyComps.SCAV, newName,
-            { memory: { role: 'scavenger', collecting: true} });
-    }
-
-    var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
-    if (workers.length < 4) {
-        var newName = 'Worker' + Game.time;
-        
-        if(Memory.lastTaskSpawned == 'build')
-        {
-            if(Game.spawns['Spawn1'].spawnCreep(bodyComps.UPPER, newName, { memory: { role: 'worker', task: 'upgrade' } }) == OK)
-            {
-                Memory.lastTaskSpawned = 'upgrade';
-                console.log('Spawning new Worker: ' + newName);
-            }
-        }
-        else
-        {
-            if(Game.spawns['Spawn1'].spawnCreep(bodyComps.BUILDER, newName, { memory: { role: 'worker', task: 'build' } }) == OK)
-            {
-                Memory.lastTaskSpawned = 'build';
-                console.log('Spawning new Worker: ' + newName);
-            }
-        }
-    }
-
     if (Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
@@ -121,7 +76,6 @@ module.exports.loop = function () {
                 break;
             default:
                 commandParser.intakeCommand(creep);
-        }
-        
+        } 
     }
 }
