@@ -1,6 +1,6 @@
 var roleHarvester = require('role.harvester');
 var bodyComps = require('settings.bodyComps');
-var commandParser = require('behavior.CommandParser');
+var commandParser = require('behavior.commandParser');
 var HarvestCommand = require('command.harvest');
 
 module.exports.loop = function () {
