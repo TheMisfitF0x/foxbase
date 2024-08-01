@@ -1,6 +1,6 @@
 var roleHarvester = require('role.harvester');
 var bodyComps = require('settings.bodyComps');
-var commandParser = require('creepBehavior.CommandParser');
+var commandParser = require('behavior.CommandParser');
 var HarvestCommand = require('command.harvest');
 
 module.exports.loop = function () {
