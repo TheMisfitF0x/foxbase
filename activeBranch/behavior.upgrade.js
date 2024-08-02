@@ -45,8 +45,9 @@ var upgradeBehavior =
             
         }
     },
-    staticSourcing: function(creep)
+    strictSourcing: function(creep)
     {
         console.log("Static sourcing not implemented");
+        this.dynamicSourcing(creep);
     }
 }
