@@ -2,7 +2,10 @@ if(!Creep.prototype.ExecuteUpgradeCommand)
     {
         Creep.prototype.ExecuteUpgradeCommand = function()
         {
-            upgradeBehavior.dynamicSourcing(creep);
+            if(this.memory.command.useDynamicSourcing)
+                upgradeBehavior.dynamicSourcing(this);
+            else
+                upgradeBehavior.strictSourcing(this);
         }
     }
 
@@ -10,7 +13,7 @@ var upgradeBehavior =
 {
     dynamicSourcing: function(creep)
     {
-    if (creep.memory.upgrading)
+        if (creep.memory.upgrading)
         {
             if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE)
             {
@@ -41,5 +44,9 @@ var upgradeBehavior =
             }
             
         }
+    },
+    staticSourcing: function(creep)
+    {
+        console.log("Static sourcing not implemented");
     }
 }

@@ -1,5 +1,6 @@
 var bodyComps = require('settings.bodyComps');
 var HarvestCommand = require('command.harvest');
+var UpgradeCommand = require('command.upgrade');
 require('protoMod.creep');
 
 module.exports.loop = function () {
@@ -92,7 +93,7 @@ module.exports.loop = function () {
                 if(creep.memory.command == null)
                 {
                     console.log("Issuing Upgrade command");
-                    creep.ReceiveCommand(new UpgradeCommand("Construction", creep.room.controller.id));
+                    creep.ReceiveCommand(new UpgradeCommand("Construction", creep.room.controller.id, true));
                 }
                 creep.Execute()
                 break;

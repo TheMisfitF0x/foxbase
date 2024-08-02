@@ -15,7 +15,7 @@ if(!Creep.prototype.ReceiveCommand)
 {
     Creep.prototype.ReceiveCommand = function(command)
     {
-        this.memory.command = JSON.stringify(command)
+        this.memory.command = command
     }
 }
 
