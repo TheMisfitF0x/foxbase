@@ -2,7 +2,7 @@ if(!Creep.prototype.ExecuteConstructCommand)
     {
         Creep.prototype.ExecuteConstructCommand = function()
         {
-            if(this.memory.command.useDynamicSourcing == true)
+            if(this.memory.command.useDynamicSourcing)
                 constructBehavior.dynamicSourcing(this);
             else
                 constructBehavior.strictSourcing(this)
@@ -51,6 +51,13 @@ var constructBehavior =
                 else
                 {
                     delete creep.memory.command
+                }
+            }
+            else
+            {
+                if(creep.harvest(creep.room.find(FIND_SOURCES)[0]) == ERR_NOT_IN_RANGE)
+                {
+                    creep.moveTo(creep.room.find(FIND_SOURCES)[0])
                 }
             }
     },

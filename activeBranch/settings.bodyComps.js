@@ -6,4 +6,11 @@ var bodyComps = {
     SCAV: [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE]
     //SCAV: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
 }
+
+var typeComps=
+{
+    runningHarvester: [WORK, CARRY, CARRY, MOVE, MOVE],
+    postedHarvester: [WORK, WORK, MOVE, MOVE],
+    worker: [WORK,CARRY,MOVE]
+}
 module.exports = bodyComps;
