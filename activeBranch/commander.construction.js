@@ -34,7 +34,7 @@ class ConstructionCommander
      * Ask the primary spawn to make a creep.
      * If the primary spawn is busy, check for secondary spawns.
      * If secondary spawns exist, request they spawn the creep.
-     * If no work, return false.
+     * If no work, go back through, add the creep to the shortest queue.
      */
     RequestCreep(creep)
     {

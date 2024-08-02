@@ -2,9 +2,10 @@ var bodyComps = require('settings.bodyComps');
 var HarvestCommand = require('command.harvest');
 var UpgradeCommand = require('command.upgrade');
 var ConstructCommand = require('command.construct');
-// var ConstructionCommander = require('commander.construction');
-// var CrewManager = require('command.crewManager');
+var ConstructionCommander = require('commander.construction');
+var CrewManager = require('commander.crewManager');
 require('protoMod.creep');
+require('protoMod.spawn');
 
 module.exports.loop = function () {
     if(!Memory.initComplete)
@@ -12,13 +13,12 @@ module.exports.loop = function () {
         newSpawnID = _.find(Game.structures, (o) => {return o.structureType == STRUCTURE_SPAWN}).id
         var newRoomControllerID = Game.getObjectById(newSpawnID).room.controller.id;
 
-        // var crewManager = new CrewManager(newSpawnID, newRoomControllerID);
-        // var constructCommander = new ConstructionCommander(newSpawnID, newRoomControllerID);
+        var crewManager = new CrewManager(newSpawnID, newRoomControllerID);
+        var constructCommander = new ConstructionCommander(newSpawnID, newRoomControllerID);
         // constructCommander.OnInit()
 
         Memory.initComplete = true;
     }
-
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -26,27 +26,6 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-    
-    var towers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {filter: (structure) => {return structure.structureType == STRUCTURE_TOWER}});
-    for(var i in towers)
-    {
-        var tower = towers[i];
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        
-        if(closestHostile) {
-            tower.attack(closestHostile);
-        }
-        
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return ((structure.structureType != STRUCTURE_WALL && structure.hits < structure.hitsMax) || (structure.structureType == STRUCTURE_WALL && structure.hits < 6000) || (structure.structureType == STRUCTURE_RAMPART && structure.hits < 150000))}
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }
-    }
-    
-    
     
     var harvs = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     if (harvs.length < Game.spawns["Spawn1"].room.find(FIND_SOURCES).length) {
@@ -95,20 +74,11 @@ module.exports.loop = function () {
                 roleScav.run(creep);
                 break;
             case 'worker':
-                if(_.find(Game.creeps, (o) => {return o.memory.command != null && o.memory.command.commandType == 'upgrade'}) != null)
-                {
-                    console.log("Issuing Construct command");
-                    creep.ReceiveCommand(new ConstructCommand("Construction", creep.room.controller.id, true));
-                }
-                else if(creep.memory.command == null)
+                if(creep.memory.command == null)
                 {
                     console.log("Issuing Upgrade command");
-                    var conSite = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES)[0];
-                    if(conSite)
-                    {
-                        var conSiteID = conSite.id;
-                        creep.ReceiveCommand(new ConstructCommand("Construction", conSiteID, true));
-                    }
+                    creep.ReceiveCommand(new UpgradeCommand("Construction", Game.spawns["Spawn1"].room.controller.id, true));
+                    
                 }
                 creep.Execute()
                 break;

@@ -2,32 +2,39 @@ if(!Creep.prototype.ExecuteUpgradeCommand)
     {
         Creep.prototype.ExecuteUpgradeCommand = function()
         {
-            if(this.memory.command.useDynamicSourcing)
-                upgradeBehavior.dynamicSourcing(this);
-            else
-                upgradeBehavior.strictSourcing(this);
+            upgradeBehavior.primary(this)
         }
     }
 
     //TODO: Refactor code to use commands
 var upgradeBehavior = 
 {
-    dynamicSourcing: function(creep)
+    primary: function(creep)
     {
         if (creep.memory.upgrading)
-        {
-            if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE)
             {
-                creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
+                var targetController = Game.getObjectById(creep.command.roomControlID);
+                if (creep.upgradeController(targetController) == ERR_NOT_IN_RANGE)
+                {
+                    creep.moveTo(targetController, { visualizePathStyle: { stroke: '#ffffff' } });
+                }
+    
+                if(creep.store.getUsedCapacity() == 0)
+                {
+                    creep.memory.upgrading = false;
+                }
             }
-
-            if(creep.store.getUsedCapacity() == 0)
+            else
             {
-                creep.memory.upgrading = false;
+                if(this.memory.command.useDynamicSourcing)
+                    upgradeBehavior.dynamicSourcing(this);
+                else
+                    upgradeBehavior.strictSourcing(this);
             }
-        }
-        else
-        {
+    },
+    dynamicSourcing: function(creep)
+    {
+        
             var container = creep.pos.findClosestByPath(FIND_STRUCTURES,{
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER) &&
