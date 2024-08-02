@@ -51,6 +51,17 @@ module.exports.loop = function () {
                 console.log('Spawning new harv: ' + newName);
             }
     }
+
+    var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
+    if (workers.length < 2) {
+        var newName = 'Worker' + Game.time;
+        if(Game.spawns['Spawn1'].spawnCreep(bodyComps.UPPER, newName, { memory: { role: 'worker', task: 'upgrade' } }) == OK)
+        {
+            console.log('Spawning new Worker: ' + newName);
+            Memory.lastTaskSpawned = 'upgrade';
+        }
+        
+    }
     
     if (Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
@@ -66,11 +77,11 @@ module.exports.loop = function () {
         switch(creep.memory.role){
             case 'harvester':
                 if(creep.memory.command == null)
-                    {
-                        console.log("Issuing Harvest command");
-                        creep.ReceiveCommand(new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
-                    }
-                    creep.Execute()
+                {
+                    console.log("Issuing Harvest command");
+                    creep.ReceiveCommand(new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
+                }
+                creep.Execute()
                 break;
             case 'scout':
                 roleScout.run(creep);
@@ -79,7 +90,12 @@ module.exports.loop = function () {
                 roleScav.run(creep);
                 break;
             case 'worker':
-                roleWorker.run(creep);
+                if(creep.memory.command == null)
+                {
+                    console.log("Issuing Upgrade command");
+                    creep.ReceiveCommand(new UpgradeCommand("Construction", creep.room.controller.id));
+                }
+                creep.Execute()
                 break;
             default:
                 if(creep.memory.command == null)
