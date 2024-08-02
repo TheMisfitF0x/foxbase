@@ -53,7 +53,7 @@ module.exports.loop = function () {
     }
 
     var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
-    if (workers.length < 2) {
+    if (workers.length < 4) {
         var newName = 'Worker' + Game.time;
         if(Game.spawns['Spawn1'].spawnCreep(bodyComps.UPPER, newName, { memory: { role: 'worker', task: 'upgrade' } }) == OK)
         {
@@ -90,10 +90,15 @@ module.exports.loop = function () {
                 roleScav.run(creep);
                 break;
             case 'worker':
-                if(creep.memory.command == null)
+                if(!_.find(Game.creeps, function(creep) {return creep.memory.command.commandType == "upgrade"}))
                 {
                     console.log("Issuing Upgrade command");
                     creep.ReceiveCommand(new UpgradeCommand("Construction", creep.room.controller.id, true));
+                }
+                else if(creep.memory.command == null)
+                {
+                    console.log("Issuing Construction command");
+                    creep.ReceiveCommand(new UpgradeCommand("Construction", Game.spawns["spawn1"].find(FIND_CONSTRUCTION_SITES)[0],));
                 }
                 creep.Execute()
                 break;
