@@ -3,6 +3,7 @@ var HarvestCommand = require('command.harvest');
 var UpgradeCommand = require('command.upgrade');
 var ConstructCommand = require('command.construct');
 var ConstructionCommander = require('commander.construction');
+var ResourcingCommander = require('commander.resourcing');
 var CrewManager = require('commander.crewManager');
 require('protoMod.creep');
 require('protoMod.spawn');
@@ -15,6 +16,7 @@ module.exports.loop = function () {
 
         var crewManager = new CrewManager(newSpawnID, newRoomControllerID);
         var constructCommander = new ConstructionCommander(newSpawnID, newRoomControllerID);
+        
         // constructCommander.OnInit()
 
         Memory.initComplete = true;
@@ -68,10 +70,14 @@ module.exports.loop = function () {
                 creep.Execute()
                 break;
             case 'scout':
-                roleScout.run(creep);
+                
                 break;
             case 'scavenger':
-                roleScav.run(creep);
+                if(creep.memory.command == null)
+                {
+                    console.log("Issuing Transfer command");
+                    creep.ReceiveCommand(new TransferCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
+                }
                 break;
             case 'worker':
                 if(creep.memory.command == null)

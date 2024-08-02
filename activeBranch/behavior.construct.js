@@ -48,10 +48,7 @@ var constructBehavior =
                         creep.moveTo(backupTargets[0], { visualizePathStyle: { stroke: '#ffffff' } });
                     }
                 }
-                else
-                {
-                    delete creep.memory.command
-                }
+                
             }
             else
             {
