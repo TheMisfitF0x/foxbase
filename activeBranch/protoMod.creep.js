@@ -29,13 +29,16 @@ if(!Creep.prototype.Execute)
                 //TODO: Figure out wtf the attack command entails lol
                 break;
             case "transfer":
-                this.ExecuteTransferCommand()
+                this.ExecuteTransferCommand();
                 break;
             case "upgrade":
-                this.ExecuteUpgradeCommand()
+                this.ExecuteUpgradeCommand();
                 break;
             case "harvest":
-                this.ExecuteHarvestCommand()
+                this.ExecuteHarvestCommand();
+                break;
+            case "construct":
+                this.ExecuteConstructCommand();
                 break;
             default:
                 console.log("No valid command loaded, command type is " + this.memory.command.commandType);

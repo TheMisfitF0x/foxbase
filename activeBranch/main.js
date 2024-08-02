@@ -1,6 +1,7 @@
 var bodyComps = require('settings.bodyComps');
 var HarvestCommand = require('command.harvest');
 var UpgradeCommand = require('command.upgrade');
+var ConstructCommand = require('command.construct');
 require('protoMod.creep');
 
 module.exports.loop = function () {
@@ -90,7 +91,7 @@ module.exports.loop = function () {
                 roleScav.run(creep);
                 break;
             case 'worker':
-                if(!_.find(Game.creeps, function(creep) {return creep.memory.command.commandType == "upgrade"}))
+                if(!_.find(Game.creeps, function(creep) {return creep.memory.command != null && creep.memory.command.commandType == 'upgrade'}))
                 {
                     console.log("Issuing Upgrade command");
                     creep.ReceiveCommand(new UpgradeCommand("Construction", creep.room.controller.id, true));
@@ -98,7 +99,9 @@ module.exports.loop = function () {
                 else if(creep.memory.command == null)
                 {
                     console.log("Issuing Construction command");
-                    creep.ReceiveCommand(new UpgradeCommand("Construction", Game.spawns["spawn1"].find(FIND_CONSTRUCTION_SITES)[0],));
+                    var conSite = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES)[0].id;
+                    if(conSite)
+                        creep.ReceiveCommand(new ConstructCommand("Construction", conSite, true));
                 }
                 creep.Execute()
                 break;

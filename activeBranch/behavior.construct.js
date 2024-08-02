@@ -49,7 +49,7 @@ var constructBehavior =
                 }
                 else
                 {
-                    creep.memory.task = 'upgrade';
+                    delete creep.memory.command
                 }
             }
     },
