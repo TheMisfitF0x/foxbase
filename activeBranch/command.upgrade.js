@@ -5,7 +5,7 @@ class UpgradeCommand extends Command
     constructor(commanderName, roomControlID)
     {
         super(commanderName, "upgrade");
-        //TODO: body script
+        this.roomControlID = roomControlID;
     }
 }
  
