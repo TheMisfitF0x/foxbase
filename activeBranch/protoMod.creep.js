@@ -15,12 +15,7 @@ if(!Creep.prototype.ReceiveCommand)
 {
     Creep.prototype.ReceiveCommand = function(command)
     {
-        this.memory.command = {
-            "commandType": command.commandType,
-            "sourceID": command.sourceID,
-            "isPostHarvest": command.isPostHarvest,
-            "homeSpawnID": command.homeSpawnID
-        }
+        this.memory.command = JSON.stringify(command)
     }
 }
 
@@ -40,7 +35,6 @@ if(!Creep.prototype.Execute)
                 this.ExecuteUpgradeCommand()
                 break;
             case "harvest":
-                console.log("Executing Harvest Command");
                 this.ExecuteHarvestCommand()
                 break;
             default:
