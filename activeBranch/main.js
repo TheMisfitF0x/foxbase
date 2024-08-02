@@ -65,7 +65,12 @@ module.exports.loop = function () {
         var creep = Game.creeps[name];
         switch(creep.memory.role){
             case 'harvester':
-                roleHarvester.runMobile(creep);
+                if(creep.memory.command == null)
+                    {
+                        console.log("Issuing Harvest command");
+                        creep.ReceiveCommand(new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
+                    }
+                    creep.Execute()
                 break;
             case 'scout':
                 roleScout.run(creep);
