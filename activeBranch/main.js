@@ -1,8 +1,7 @@
 var roleHarvester = require('role.harvester');
 var bodyComps = require('settings.bodyComps');
-var commandParser = require('behavior.commandParser');
 var HarvestCommand = require('command.harvest');
-var myCreep = require('protoMod.creep');
+require('protoMod.creep');
 
 module.exports.loop = function () {
     
@@ -78,7 +77,12 @@ module.exports.loop = function () {
                 roleWorker.run(creep);
                 break;
             default:
-                commandParser.IntakeCommand(creep, new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
+                if(creep.memory.command == null)
+                {
+                    console.log("Issuing Harvest command");
+                    creep.ReceiveCommand(new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false, Game.spawns["Spawn1"].id));
+                }
+                creep.Execute()
                 break;
         } 
     }

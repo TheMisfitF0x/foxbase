@@ -1,15 +1,50 @@
-if(!Creep.prototype.CheckCapability)
+require('behavior.harvest');
+require('behavior.transfer');
+require('behavior.upgrade');
+require('behavior.construct');
+
+if(!Creep.prototype.VerifyCommand)
 {
-    Creep.prototype.CheckCapability = function(command)
+    Creep.prototype.VerifyCommand = function(command)
     {
         return "Checking Capability to execute Command";
     }
 }
 
-if(!Creep.prototype.IntakeCommand)
+if(!Creep.prototype.ReceiveCommand)
 {
-    Creep.prototype.IntakeCommand = function(command)
+    Creep.prototype.ReceiveCommand = function(command)
     {
-        return "Taking Command details into memory";
+        this.memory.command = {
+            "commandType": command.commandType,
+            "sourceID": command.sourceID,
+            "isPostHarvest": command.isPostHarvest,
+            "homeSpawnID": command.homeSpawnID
+        }
+    }
+}
+
+if(!Creep.prototype.Execute)
+{
+    Creep.prototype.Execute = function()
+    {
+        switch(this.memory.command.commandType)
+        {
+            case "attack":
+                //TODO: Figure out wtf the attack command entails lol
+                break;
+            case "transfer":
+                this.ExecuteTransferCommand()
+                break;
+            case "upgrade":
+                this.ExecuteUpgradeCommand()
+                break;
+            case "harvest":
+                console.log("Executing Harvest Command");
+                this.ExecuteHarvestCommand()
+                break;
+            default:
+                console.log("No valid command loaded, command type is " + this.memory.command.commandType);
+        }
     }
 }
