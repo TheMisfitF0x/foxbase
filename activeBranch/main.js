@@ -2,6 +2,7 @@ var roleHarvester = require('role.harvester');
 var bodyComps = require('settings.bodyComps');
 var commandParser = require('behavior.commandParser');
 var HarvestCommand = require('command.harvest');
+var myCreep = require('protoMod.creep');
 
 module.exports.loop = function () {
     
