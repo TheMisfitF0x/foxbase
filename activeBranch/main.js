@@ -1,4 +1,3 @@
-var roleHarvester = require('role.harvester');
 var bodyComps = require('settings.bodyComps');
 var HarvestCommand = require('command.harvest');
 require('protoMod.creep');
