@@ -19,6 +19,11 @@ var upgradeBehavior =
             {
                 creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
             }
+
+            if(creep.store.getUsedCapacity() == 0)
+            {
+                creep.memory.upgrading = false;
+            }
         }
         else
         {
@@ -43,6 +48,10 @@ var upgradeBehavior =
                 }
             }
             
+            if(creep.store.getFreeCapacity() == 0)
+            {
+                creep.memory.upgrading = true;
+            }
         }
     },
     strictSourcing: function(creep)
