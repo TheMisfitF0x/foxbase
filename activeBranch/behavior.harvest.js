@@ -9,7 +9,7 @@ if(!Creep.prototype.ExecuteHarvestCommand)
         
     }
 }
-
+//TODO: Refactor code to use commands
 var harvestBehavior = {
     runPosted: function(creep) 
     {

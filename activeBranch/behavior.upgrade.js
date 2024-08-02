@@ -9,6 +9,7 @@ if(!Creep.prototype.ExecuteUpgradeCommand)
         }
     }
 
+    //TODO: Refactor code to use commands
 var upgradeBehavior = 
 {
     dynamicSourcing: function(creep)

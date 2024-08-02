@@ -9,6 +9,7 @@ if(!Creep.prototype.ExecuteConstructCommand)
         }
     }
 
+    //TODO: Refactor code to use commands
 var constructBehavior = 
 {
     dynamicSourcing: function(creep)
