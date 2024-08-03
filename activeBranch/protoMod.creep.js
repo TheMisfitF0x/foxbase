@@ -4,8 +4,6 @@ require('behavior.upgrade');
 require('behavior.construct');
 require('behavior.sourcing');
 
-
-
 if(!Creep.prototype.VerifyCommand)
 {
     /**

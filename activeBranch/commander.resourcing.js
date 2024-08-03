@@ -23,11 +23,30 @@ class ResourcingCommander extends Commander
      */
     Update()
     {
+        this.ProcessLootables();
+    }
+
+    ProcessLootables()
+    {
         var spawn = Game.getObjectById(this.primarySpawnID);
         var pools = spawn.room.find(FIND_DROPPED_RESOURCES);
         var graves = spawn.room.find(FIND_TOMBSTONES);
         var ruins = spawn.room.find(FIND_RUINS);
-        
+        for(var pool in pools)
+        {
+            var commandMatch = false;
+            var poolID = pool.id;
+            for(var command in this.primarySpawn.memory.resourcingCommandQueue)
+            {
+                if(poolID == command.collectFromID)
+                {
+                    commandMatch = true;
+                    break; 
+                }
+            }
+            if(!commandMatch)
+                this.IssueCommand(new TransferCommand(this.commanderName, poolID));
+        }
     }
 
     /** 

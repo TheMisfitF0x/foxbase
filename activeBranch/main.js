@@ -20,6 +20,7 @@ module.exports.loop = function () {
         Memory.initComplete = true;
     }
     
+    // resourcingCommander.IssueCommand("FUCK YOU");
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -44,7 +45,6 @@ module.exports.loop = function () {
             console.log('Spawning new Worker: ' + newName);
             Memory.lastTaskSpawned = 'upgrade';
         }
-        
     }
     
     if (Game.spawns['Spawn1'].spawning) {
