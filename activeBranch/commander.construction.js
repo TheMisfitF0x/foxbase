@@ -1,9 +1,10 @@
-class ConstructionCommander
+var Commander = require('commander.base');
+
+class ConstructionCommander extends Commander
 {
     constructor(primarySpawnID, roomControllerID)
     {
-        this.roomControllerID = roomControllerID;
-        this.primarySpawn = primarySpawn;
+        super("construction", primarySpawnID, roomControllerID)
     }
 
     /**
@@ -11,12 +12,23 @@ class ConstructionCommander
      */
     OnInit()
     {
+        super.OnInit()
         var controllerPath = Game.spawns['Spawn1'].pos.findPathTo(Game.spawns['Spawn1'].room.controller);
         for(var point in controllerPath)
         {
             var pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns["Spawn1"].room.name);
             pointPos.createConstructionSite(STRUCTURE_ROAD);
         }
+    }
+
+    /**
+     * I guess for starters, have it check every consite.
+     * If it still exists, check for an order.
+     * If there is no order, post one.
+     */
+    Update()
+    {
+
     }
 
     PlotRoadToController()
@@ -47,25 +59,7 @@ class ConstructionCommander
     OnCreepDeath(deadCreep)
     {
 
-    }
-
-    /**
-     * Send a command to the crew manager to distribute to an able-bodied creep.
-     */
-    IssueCommand()
-    {
-
-    }
-
-    /**
-     * I guess for starters, have it check every consite.
-     * If it still exists, check for an order.
-     * If there is no order, post one.
-     */
-    Update()
-    {
-
-    }
+    } 
 }
 
 module.exports = ConstructionCommander;

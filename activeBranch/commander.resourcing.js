@@ -1,33 +1,33 @@
-class ConstructionCommander
+var Commander = require('commander.base');
+
+class ResourcingCommander extends Commander
 {
     constructor(primarySpawnID, roomControllerID)
     {
-        this.roomControllerID = roomControllerID;
-        this.primarySpawn = primarySpawn;
+        super("resourcing", primarySpawnID, roomControllerID)
     }
 
     /**
      * What to do on first spawn
      */
-    OnInit()
-    {
-        var controllerPath = Game.spawns['Spawn1'].pos.findPathTo(Game.spawns['Spawn1'].room.controller);
-        for(var point in controllerPath)
-        {
-            var pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns["Spawn1"].room.name);
-            pointPos.createConstructionSite(STRUCTURE_ROAD);
-        }
-    }
+    // OnInit()
+    // {
+    //     super.OnInit()
+    // }
 
-    PlotRoadToController()
+    /**
+     * Check for the existence of dropped resources, ruins, or graves. 
+     * Send a transfer from those items to the nearest container/storage.
+     * Then, check for low towers, extensions, spawns.
+     * Send a transfer to those items from the nearest container/storage
+     */
+    Update()
     {
-        var controllerPath = Game.spawns['Spawn1'].pos.findPathTo(Game.spawns['Spawn1'].room.controller);
-        for(var point in controllerPath)
-        {
-            var pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns["Spawn1"].room.name);
-            pointPos.createConstructionSite(STRUCTURE_ROAD);
-        }
-        return controllerPath
+        var spawn = Game.getObjectById(this.primarySpawnID);
+        var pools = spawn.room.find(FIND_DROPPED_RESOURCES);
+        var graves = spawn.room.find(FIND_TOMBSTONES);
+        var ruins = spawn.room.find(FIND_RUINS);
+        
     }
 
     /** 
@@ -47,25 +47,7 @@ class ConstructionCommander
     OnCreepDeath(deadCreep)
     {
 
-    }
-
-    /**
-     * Send a command to the crew manager to distribute to an able-bodied creep.
-     */
-    IssueCommand()
-    {
-
-    }
-
-    /**
-     * I guess for starters, have it check every consite.
-     * If it still exists, check for an order.
-     * If there is no order, post one.
-     */
-    Update()
-    {
-
-    }
+    } 
 }
 
-module.exports = ConstructionCommander;
+module.exports = ResourcingCommander;

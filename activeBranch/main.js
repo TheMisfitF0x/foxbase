@@ -4,24 +4,22 @@ var UpgradeCommand = require('command.upgrade');
 var ConstructCommand = require('command.construct');
 var ConstructionCommander = require('commander.construction');
 var ResourcingCommander = require('commander.resourcing');
-var CrewManager = require('commander.crewManager');
 require('protoMod.creep');
 require('protoMod.spawn');
 
 module.exports.loop = function () {
+    var newSpawnID = _.find(Game.structures, (o) => {return o.structureType == STRUCTURE_SPAWN}).id
+    var newRoomControllerID = Game.getObjectById(newSpawnID).room.controller.id;
+    var resourcingCommander = new ResourcingCommander(newSpawnID, newRoomControllerID);
+    var constructCommander = new ConstructionCommander(newSpawnID, newRoomControllerID);
+
     if(!Memory.initComplete)
     {
-        newSpawnID = _.find(Game.structures, (o) => {return o.structureType == STRUCTURE_SPAWN}).id
-        var newRoomControllerID = Game.getObjectById(newSpawnID).room.controller.id;
-
-        var crewManager = new CrewManager(newSpawnID, newRoomControllerID);
-        var constructCommander = new ConstructionCommander(newSpawnID, newRoomControllerID);
-        
-        // constructCommander.OnInit()
-
+        resourcingCommander.OnInit()
+        constructCommander.OnInit()
         Memory.initComplete = true;
     }
-
+    
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
