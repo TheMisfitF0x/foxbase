@@ -41,7 +41,7 @@ module.exports.loop = function () {
     }
 
     var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
-    if (workers.length < 4) {
+    if (workers.length < 4 && harvs.length > 1) {
         var newName = 'Worker' + Game.time;
         if(Game.spawns['Spawn1'].spawnCreep(bodyComps.UPPER, newName, { memory: { role: 'worker', task: 'upgrade' } }) == OK)
         {

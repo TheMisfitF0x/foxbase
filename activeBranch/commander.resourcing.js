@@ -40,7 +40,7 @@ class ResourcingCommander extends Commander
             var lootableType = lootableTypes[lootableTypeIndex];
             var lootables = primarySpawn.room.find(lootableType)
 
-            for(var x in lootables) //TODO: Find someway to condense these three for statements into one.
+            for(var x in lootables) 
             {
                 var lootable = lootables[x];
                 var commandMatch = false;
