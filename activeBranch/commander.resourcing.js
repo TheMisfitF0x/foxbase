@@ -69,12 +69,12 @@ class ResourcingCommander extends Commander
         var primarySpawn = Game.getObjectById(this.primarySpawnID);
         for(var x in primarySpawn.memory.resourcingCommandQueue)
         {
-            var command = this.primarySpawn.memory.resourcingCommandQueue[x];
+            var command = primarySpawn.memory.resourcingCommandQueue[x];
             var collectFromObject = Game.getObjectById(command.collectFromID);
 
             if(!collectFromObject)
             {
-                delete this.primarySpawn.memory.resourcingCommandQueue[x];
+                primarySpawn.memory.resourcingCommandQueue.splice(x,1);
             }
         }
     }
