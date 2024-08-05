@@ -23,7 +23,7 @@ module.exports.loop = function () {
     // Game.spawns["Spawn1"].room.find(FIND_SOURCES)[0].memory.associatedCommand = Game.spawns["Spawn1"].memory.resourcingCommandQueue[0];
     // console.log(Game.spawns["Spawn1"].room.find(FIND_SOURCES)[0].memory.associatedCommand);
 
-    //resourcingCommander.Update();
+    resourcingCommander.Update();
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -71,7 +71,6 @@ module.exports.loop = function () {
                 creep.Execute()
                 break;
             case 'scout':
-                
                 break;
             case 'scavenger':
                 if(creep.memory.command == null)
@@ -90,11 +89,6 @@ module.exports.loop = function () {
                 creep.Execute()
                 break;
             default:
-                if(creep.memory.command == null)
-                {
-                    console.log("Issuing Harvest command");
-                    creep.ReceiveCommand(new HarvestCommand("Resourcing", creep.room.find(FIND_SOURCES)[0].id, false));
-                }
                 creep.Execute()
                 break;
         } 

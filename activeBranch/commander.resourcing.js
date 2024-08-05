@@ -33,7 +33,7 @@ class ResourcingCommander extends Commander
      */
     ProcessLootables(lootableTypes)
     {
-        var spawn = Game.getObjectById(this.primarySpawnID);//IDEA: Move these hard-specified FINDS to an array parameter.
+        var spawn = Game.getObjectById(this.primarySpawnID);
         
         for(var lootableTypeIndex in lootableTypes)
         {
@@ -66,6 +66,7 @@ class ResourcingCommander extends Commander
 
     deleteInvalidCommands()
     {
+        var spawn = Game.getObjectById(this.primarySpawnID);
         for(var x in this.primarySpawn.memory.resourcingCommandQueue)
         {
             var command = this.primarySpawn.memory.resourcingCommandQueue[x];
