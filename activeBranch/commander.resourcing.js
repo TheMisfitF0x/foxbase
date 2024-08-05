@@ -24,72 +24,32 @@ class ResourcingCommander extends Commander
      */
     Update()
     {
-        this.ProcessLootables();
+        this.ProcessLootables([FIND_DROPPED_RESOURCES, FIND_TOMBSTONES, FIND_RUINS]);
+        this.deleteInvalidCommands();
     }
 
     /**
      * Check for the existence of pools, graves, or ruins without commands. If one is found, add a command.
      */
-    ProcessLootables()
+    ProcessLootables(lootableTypes)
     {
-        var spawn = Game.getObjectById(this.primarySpawnID);
-        var pools = spawn.room.find(FIND_DROPPED_RESOURCES);
-        var graves = spawn.room.find(FIND_TOMBSTONES);
-        var ruins = spawn.room.find(FIND_RUINS);
-
-        for(var x in pools) //TODO: Find someway to condense these three for statements into one.
+        var spawn = Game.getObjectById(this.primarySpawnID);//IDEA: Move these hard-specified FINDS to an array parameter.
+        
+        for(var lootableTypeIndex in lootableTypes)
         {
-            var pool = pools[x];
-            var commandMatch = false;
-            var poolID = pool.id;
+            var lootableType = lootableTypes[lootableTypeIndex];
+            var lootables = spawn.room.find(lootableType)
 
-            for(var y in this.primarySpawn.memory.resourcingCommandQueue)
+            for(var x in lootables) //TODO: Find someway to condense these three for statements into one.
             {
-                var command = this.primarySpawn.memory.resourcingCommandQueue[y];
-                if(poolID == command.collectFromID)
-                {
-                    commandMatch = true;
-                    break; 
-                }
-            }
-
-            if(!commandMatch)
-            {
-                this.IssueCommand(new TransferCommand(this.commanderName, poolID));
-            }
-        }
-
-        for(var x in graves)
-        {
-            var grave = graves[x];
-            var commandMatch = false;
-            var graveID = grave.id;
-            
-            for(var y in this.primarySpawn.memory.resourcingCommandQueue)
-            {
-                var command = this.primarySpawn.memory.resourcingCommandQueue[y];
-                if(graveID == command.collectFromID)
-                {
-                    commandMatch = true;
-                    break; 
-                }
-            }
-
-            if(!commandMatch)
-            {
-                this.IssueCommand(new TransferCommand(this.commanderName, graveID));
-            }
-        }
-
-            for(var x in ruins)
-            {
-                var ruin = ruins[x];
+                var lootable = lootables[x];
                 var commandMatch = false;
-                var ruinID = ruin.id;
+                var lootableID = lootable.id;
+
                 for(var y in this.primarySpawn.memory.resourcingCommandQueue)
                 {
                     var command = this.primarySpawn.memory.resourcingCommandQueue[y];
-                    if(ruinID == command.collectFromID)
+                    if(lootableID == command.collectFromID)
                     {
                         commandMatch = true;
                         break; 
@@ -98,9 +58,24 @@ class ResourcingCommander extends Commander
 
                 if(!commandMatch)
                 {
-                    this.IssueCommand(new TransferCommand(this.commanderName, ruinID));
+                    this.IssueCommand(new TransferCommand(this.commanderName, lootableID));
                 }
             }
+        }
+    }
+
+    deleteInvalidCommands()
+    {
+        for(var x in this.primarySpawn.memory.resourcingCommandQueue)
+        {
+            var command = this.primarySpawn.memory.resourcingCommandQueue[x];
+            var collectFromObject = Game.getObjectById(command.collectFromID);
+
+            if(!collectFromObject)
+            {
+                delete this.primarySpawn.memory.resourcingCommandQueue[x];
+            }
+        }
     }
 
     /** 
