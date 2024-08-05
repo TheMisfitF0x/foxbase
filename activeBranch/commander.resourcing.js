@@ -33,12 +33,12 @@ class ResourcingCommander extends Commander
      */
     ProcessLootables(lootableTypes)
     {
-        var spawn = Game.getObjectById(this.primarySpawnID);
+        var primarySpawn = Game.getObjectById(this.primarySpawnID);
         
         for(var lootableTypeIndex in lootableTypes)
         {
             var lootableType = lootableTypes[lootableTypeIndex];
-            var lootables = spawn.room.find(lootableType)
+            var lootables = primarySpawn.room.find(lootableType)
 
             for(var x in lootables) //TODO: Find someway to condense these three for statements into one.
             {
@@ -46,9 +46,9 @@ class ResourcingCommander extends Commander
                 var commandMatch = false;
                 var lootableID = lootable.id;
 
-                for(var y in this.primarySpawn.memory.resourcingCommandQueue)
+                for(var y in primarySpawn.memory.resourcingCommandQueue)
                 {
-                    var command = this.primarySpawn.memory.resourcingCommandQueue[y];
+                    var command = primarySpawn.memory.resourcingCommandQueue[y];
                     if(lootableID == command.collectFromID)
                     {
                         commandMatch = true;
@@ -66,8 +66,8 @@ class ResourcingCommander extends Commander
 
     deleteInvalidCommands()
     {
-        var spawn = Game.getObjectById(this.primarySpawnID);
-        for(var x in this.primarySpawn.memory.resourcingCommandQueue)
+        var primarySpawn = Game.getObjectById(this.primarySpawnID);
+        for(var x in primarySpawn.memory.resourcingCommandQueue)
         {
             var command = this.primarySpawn.memory.resourcingCommandQueue[x];
             var collectFromObject = Game.getObjectById(command.collectFromID);
