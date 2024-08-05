@@ -38,6 +38,30 @@ class Commander
                 break;
         }
     }
+
+    /**
+     * When a creep dies, remove it from the command it was on if it had one,
+     */
+    OnCreepDeath(deadCreep)
+    {
+        if(deadCreep.memory.command)
+        {
+            switch(deadCreep.memory.command.commanderName)
+            {
+                case "resourcing":
+                    break;
+                
+                case "construction":
+                    break;
+
+                case "combat":
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+    } 
 }
 
 module.exports = Commander;

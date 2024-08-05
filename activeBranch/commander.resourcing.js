@@ -1,4 +1,5 @@
 var Commander = require('commander.base');
+var TransferCommand = require('command.transfer');
 
 class ResourcingCommander extends Commander
 {
@@ -26,27 +27,80 @@ class ResourcingCommander extends Commander
         this.ProcessLootables();
     }
 
+    /**
+     * Check for the existence of pools, graves, or ruins without commands. If one is found, add a command.
+     */
     ProcessLootables()
     {
         var spawn = Game.getObjectById(this.primarySpawnID);
         var pools = spawn.room.find(FIND_DROPPED_RESOURCES);
         var graves = spawn.room.find(FIND_TOMBSTONES);
         var ruins = spawn.room.find(FIND_RUINS);
-        for(var pool in pools)
+
+        for(var x in pools) //TODO: Find someway to condense these three for statements into one.
         {
+            var pool = pools[x];
             var commandMatch = false;
             var poolID = pool.id;
-            for(var command in this.primarySpawn.memory.resourcingCommandQueue)
+
+            for(var y in this.primarySpawn.memory.resourcingCommandQueue)
             {
+                var command = this.primarySpawn.memory.resourcingCommandQueue[y];
                 if(poolID == command.collectFromID)
                 {
                     commandMatch = true;
                     break; 
                 }
             }
+
             if(!commandMatch)
+            {
                 this.IssueCommand(new TransferCommand(this.commanderName, poolID));
+            }
         }
+
+        for(var x in graves)
+        {
+            var grave = graves[x];
+            var commandMatch = false;
+            var graveID = grave.id;
+            
+            for(var y in this.primarySpawn.memory.resourcingCommandQueue)
+            {
+                var command = this.primarySpawn.memory.resourcingCommandQueue[y];
+                if(graveID == command.collectFromID)
+                {
+                    commandMatch = true;
+                    break; 
+                }
+            }
+
+            if(!commandMatch)
+            {
+                this.IssueCommand(new TransferCommand(this.commanderName, graveID));
+            }
+        }
+
+            for(var x in ruins)
+            {
+                var ruin = ruins[x];
+                var commandMatch = false;
+                var ruinID = ruin.id;
+                for(var y in this.primarySpawn.memory.resourcingCommandQueue)
+                {
+                    var command = this.primarySpawn.memory.resourcingCommandQueue[y];
+                    if(ruinID == command.collectFromID)
+                    {
+                        commandMatch = true;
+                        break; 
+                    }
+                }
+
+                if(!commandMatch)
+                {
+                    this.IssueCommand(new TransferCommand(this.commanderName, ruinID));
+                }
+            }
     }
 
     /** 
@@ -60,13 +114,7 @@ class ResourcingCommander extends Commander
         
     }
 
-    /**
-     * When a creep dies, check to see if the creep needs to be replaced according to the plan.
-     */
-    OnCreepDeath(deadCreep)
-    {
-
-    } 
+    
 }
 
 module.exports = ResourcingCommander;

@@ -20,7 +20,10 @@ module.exports.loop = function () {
         Memory.initComplete = true;
     }
     
-    // resourcingCommander.IssueCommand("FUCK YOU");
+    // Game.spawns["Spawn1"].room.find(FIND_SOURCES)[0].memory.associatedCommand = Game.spawns["Spawn1"].memory.resourcingCommandQueue[0];
+    // console.log(Game.spawns["Spawn1"].room.find(FIND_SOURCES)[0].memory.associatedCommand);
+
+    //resourcingCommander.Update();
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
