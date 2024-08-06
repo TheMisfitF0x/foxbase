@@ -30,6 +30,7 @@ class ResourcingCommander extends Commander
 
     /**
      * Check for the existence of pools, graves, or ruins without commands. If one is found, add a command.
+     * @param {String[]} lootableTypes An array of FIND_* constants to locate.
      */
     ProcessLootables(lootableTypes)
     {
@@ -63,7 +64,8 @@ class ResourcingCommander extends Commander
             }
         }
     }
-
+    
+    //TODO: Fix spawn reference...
     deleteInvalidCommands()
     {
         var primarySpawn = Game.getObjectById(this.primarySpawnID);
@@ -77,6 +79,15 @@ class ResourcingCommander extends Commander
                 primarySpawn.memory.resourcingCommandQueue.splice(x,1);
             }
         }
+    }
+
+    /**
+     * Pushes command to respective commander queue. Considering decoupling these queues from spawn memory and storing in root.
+     * @param {Command} command Command to be pushed to queue
+     */
+    SubmitCommand(command)
+    {
+        this.primarySpawn.memory.resourcingCommandQueue.push(command);
     }
 
     /** 

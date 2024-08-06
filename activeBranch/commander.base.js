@@ -33,15 +33,15 @@ class Commander
         switch(this.commanderName)
         {
             case "resourcing":
-                this.primarySpawn.memory.resourcingCommandQueue.push(command) 
+                this.primarySpawn.memory.resourcingCommandQueue.push(command); 
                 break;
             
             case "construction":
-                this.primarySpawn.memory.constructionCommandQueue.push(command)
+                this.primarySpawn.memory.constructionCommandQueue.push(command);
                 break;
 
             case "combat":
-                this.primarySpawn.memory.combatCommandQueue.push(command)
+                this.primarySpawn.memory.combatCommandQueue.push(command);
                 break;
         }
     }
