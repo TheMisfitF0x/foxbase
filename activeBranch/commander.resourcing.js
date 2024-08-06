@@ -30,6 +30,7 @@ class ResourcingCommander extends Commander
 
     /**
      * Check for the existence of pools, graves, or ruins without commands. If one is found, add a command.
+     * - TODO: Fix the spawn reference here...
      * @param {String[]} lootableTypes An array of FIND_* constants to locate.
      */
     ProcessLootables(lootableTypes)
@@ -65,7 +66,11 @@ class ResourcingCommander extends Commander
         }
     }
     
-    //TODO: Fix spawn reference...
+    /**
+     * This iterates through all commands in the respective command queue.
+     * If any point to a container that does not exist, remove them.
+     * - TODO: Fix spawn reference...
+     */
     deleteInvalidCommands()
     {
         var primarySpawn = Game.getObjectById(this.primarySpawnID);
