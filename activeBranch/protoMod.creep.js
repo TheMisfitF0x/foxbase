@@ -40,26 +40,29 @@ if(!Creep.prototype.Execute)
      */
     Creep.prototype.Execute = function()
     {
-        switch(this.memory.command.commandType)
+        if(this.memory.command)
         {
-            case "attack":
-                //TODO: Figure out wtf the attack command entails lol
-                break;
-            case "transfer":
-                this.ExecuteTransferCommand();
-                break;
-            case "upgrade":
-                this.ExecuteUpgradeCommand();
-                break;
-            case "harvest":
-                this.ExecuteHarvestCommand();
-                break;
-            case "construct":
-                this.ExecuteConstructCommand();
-                break;
-            default:
-                console.log("No valid command loaded, command type is " + this.memory.command.commandType);
-                break;
+            switch(this.memory.command.commandType)
+            {
+                case "attack":
+                    //TODO: Figure out wtf the attack command entails lol
+                    break;
+                case "transfer":
+                    this.ExecuteTransferCommand();
+                    break;
+                case "upgrade":
+                    this.ExecuteUpgradeCommand();
+                    break;
+                case "harvest":
+                    this.ExecuteHarvestCommand();
+                    break;
+                case "construct":
+                    this.ExecuteConstructCommand();
+                    break;
+                default:
+                    console.log("No valid command loaded, command type is " + this.memory.command.commandType);
+                    break;
+            }
         }
     }
 }
