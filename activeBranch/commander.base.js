@@ -22,11 +22,11 @@ class Commander
     }
 
     /**
-     * @param {Command} command 
      * This method will likely be split into its constituient parts per commander type. 
      * The base implementation will be distribution to an available creep.
      * Alternatively, commanders will receive submitCommand(command), which pushes it to queue.
      * TODO: In either case, this function needs implementation to send to an available creep.
+     * @param {Command} command The command to be pushed to queue
      */
     IssueCommand(command)
     {
@@ -49,8 +49,8 @@ class Commander
     /**
      * When a creep dies, remove it from the command it was on if it had one.
      * This too is a weird one, and the reason why I might still set a crew manager as opposed to letting the commanders handle everything.
-     * Commands may also need an ID to quickly find and update their statuses. 
-     * TODO: Learn how to generate random IDs for things. OR just implement using Date.now(), assuming it's supported.
+     * Commands have been given an ID using Date.now(), this should help in the future.
+     * @param {Creep} deadCreep The dumbass creep that bit the dust (what a loser.)
      */
     OnCreepDeath(deadCreep)
     {
@@ -70,7 +70,6 @@ class Commander
                     break;
             }
         }
-        
     } 
 }
 
