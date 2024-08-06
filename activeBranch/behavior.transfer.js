@@ -4,7 +4,7 @@ if(!Creep.prototype.ExecuteTransferCommand)
     {
         
         var collectFromContainer = Game.getObjectById(this.memory.command.collectFromID);
-        var returnToContainer = Game.getObjectById(this.memory.command.returnToID);
+        
         
         if((this.memory.command.takeAll && (collectFromContainer.store.getUsedCapacity == 0 || !collectFromContainer)) || (this.store.getFreeCapacity() == 0 || !collectFromContainer))
         {
@@ -23,5 +23,17 @@ if(!Creep.prototype.ExecuteTransferCommand)
                 this.moveTo(collectFromContainer, { visualizePathStyle: { stroke: '#ffffff' } });
             }
         }   
+        else if(this.memory.command.returnToID)
+        {
+            var returnToContainer = Game.getObjectById(this.memory.command.returnToID);
+            if(this.transfer(returnToContainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
+            {
+                this.moveTo(returnToContainer, { visualizePathStyle: { stroke: '#ffffff' } });
+            }
+        }
+        else
+        {
+            //Create functions for lowest store and closest container, pick one fucko.
+        }
     }
 }

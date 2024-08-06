@@ -49,11 +49,22 @@ module.exports.loop = function () {
             Memory.lastTaskSpawned = 'upgrade';
         }
     }
+
+    var trucks = _.filter(Game.creeps, (creep) => creep.memory.type == 'truck');
+    if(trucks.length < 2 && harvs.length > 1)
+    {
+        var newName = 'Truck' + Game.time;
+        if(Game.spawns['Spawn1'].spawnCreep(bodyComps.SCAV, newName) == OK)
+        {
+            console.log('Spawning new Worker: ' + newName);
+            Memory.lastTaskSpawned = 'upgrade';
+        }
+    }
     
     if (Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
+            '🛠️' + spawningCreep.name,
             Game.spawns['Spawn1'].pos.x + 1,
             Game.spawns['Spawn1'].pos.y,
             { align: 'left', opacity: 0.8 });
