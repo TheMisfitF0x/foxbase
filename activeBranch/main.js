@@ -54,7 +54,7 @@ module.exports.loop = function () {
     if(trucks.length < 2 && harvs.length > 1)
     {
         var newName = 'Truck' + Game.time;
-        if(Game.spawns['Spawn1'].spawnCreep(bodyComps.SCAV, newName) == OK)
+        if(Game.spawns['Spawn1'].spawnCreep(bodyComps.SCAV, newName, {memory: {type: "truck"}}) == OK)
         {
             console.log('Spawning new Worker: ' + newName);
             Memory.lastTaskSpawned = 'upgrade';
