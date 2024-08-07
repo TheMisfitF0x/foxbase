@@ -20,7 +20,7 @@ if(!Creep.prototype.findClosestEStorage)
 
 if(!Creep.prototype.findlowestEStorage)
     {
-        Creep.prototype.findClosestEStorage = function()
+        Creep.prototype.findLowestEStorage = function()
         {
             
         }

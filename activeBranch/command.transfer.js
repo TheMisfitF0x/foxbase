@@ -1,13 +1,23 @@
 const Command = require("command.base");
 
+/* 
+Thinking about changing transfer commands to have a room, a target, and a retrieveFromTarget bool that is true for lootables
+or rooms that I'm evacuating (for whatever reason.)
+So basically, if retrieveFromTarget is true, 
+then the creep takes from the target GameObject and returns it to the room dynamically
+If it's false, 
+the creep takes from the specified room dynamically and takes it to the target. 
+*/
+
 class TransferCommand extends Command
 {
-    constructor(commanderName, collectFromID, returnToID, takeAll)
+    constructor(commanderName, roomID, targetID, takeAll = true, isDelivery = true)
     {
         super(commanderName, "transfer")
-        this.collectFromID = collectFromID;
-        this.returnToID = returnToID;
+        this.targetID = targetID;
+        this.roomID = roomID;
         this.takeAll = takeAll;
+        this.isDelivery = isDelivery;
     }
 }
  
