@@ -3,6 +3,7 @@ require('behavior.transfer');
 require('behavior.upgrade');
 require('behavior.construct');
 require('behavior.sourcing');
+require('behavior.findEStorage');
 
 if(!Creep.prototype.VerifyCommand)
 {
@@ -13,7 +14,43 @@ if(!Creep.prototype.VerifyCommand)
      */
     Creep.prototype.VerifyCommand = function(command)
     {
-        return "Checking Capability to execute Command";
+        var baseBodiesNeeded = [];
+        switch(command.commandType)
+        {
+            case "attack":
+                baseBodiesNeeded = [ATTACK, MOVE];
+                break;
+            case "transfer":
+                baseBodiesNeeded = [CARRY, MOVE];
+                break;
+            case "upgrade":
+                baseBodiesNeeded = [WORK, CARRY, MOVE];
+                break;
+            case "harvest":
+                baseBodiesNeeded = [WORK, CARRY, MOVE];
+                break;
+            case "construct":
+                baseBodiesNeeded = [WORK, CARRY, MOVE];
+                break;
+            case "capture":
+                baseBodiesNeeded = [CLAIM, MOVE];
+            default:
+                console.log("Cannot Verify, unknown or invalid command");
+                break;
+        }
+
+        
+        for(var x in baseBodiesNeeded)
+        {
+            var bodyType = baseBodiesNeeded[x];
+            if(!this.body.includes(bodyType))
+            {
+                return false;
+            }
+        }
+
+        return true;
+            
     }
 }
 
