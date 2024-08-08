@@ -11,19 +11,18 @@ const Command = require("command.base");
 class TransferCommand extends Command
 {
     /**
-     * 
-     * @param {String} commanderName 
-     * @param {int} roomID 
-     * @param {String} targetID 
-     * @param {boolean} takeAll 
-     * @param {boolean} isDelivery 
+     * @param {String} commanderName The name of the commander who issued the order (usually "resourcing" or "combat")
+     * @param {int} roomName The name of the room to be sourced from/delivered to
+     * @param {String} targetID The name of the object to be delivered to/looted from
+     * @param {boolean} entireJob If isDelivery, should it keep delivering until the object is full? Else, should the creep keep looting until the item is empty? True by default.
+     * @param {boolean} isDelivery If true, the target item should be restocked with energy, else energy should be removed. False by default.
      */
-    constructor(commanderName, roomID, targetID, takeAll = true, isDelivery = false)
+    constructor(commanderName, roomName, targetID, entireJob = true, isDelivery = false)
     {
         super(commanderName, "transfer")
         this.targetID = targetID;
-        this.roomID = roomID;
-        this.takeAll = takeAll;
+        this.roomID = roomName;
+        this.entireJob = entireJob;
         this.isDelivery = isDelivery;
     }
 }
