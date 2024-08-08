@@ -18,7 +18,7 @@ class TransferCommand extends Command
      * @param {boolean} takeAll 
      * @param {boolean} isDelivery 
      */
-    constructor(commanderName, roomID, targetID, takeAll = true, isDelivery = true)
+    constructor(commanderName, roomID, targetID, takeAll = true, isDelivery = false)
     {
         super(commanderName, "transfer")
         this.targetID = targetID;
