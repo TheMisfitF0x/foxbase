@@ -7,6 +7,7 @@ class Command
         else
             Memory.commandsCreated++;
         this.commandID = Memory.commandsCreated;
+        this.commandStatus = "created";
         this.commanderName = commanderName;
         this.commandType = commandType;  
     }

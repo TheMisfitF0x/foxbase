@@ -3,9 +3,9 @@ var TransferCommand = require('command.transfer');
 
 class ResourcingCommander extends Commander
 {
-    constructor(primarySpawnID, roomControllerID)
+    constructor()
     {
-        super("resourcing", primarySpawnID, roomControllerID)
+        super("resourcing")
     }
 
     /**
@@ -33,14 +33,14 @@ class ResourcingCommander extends Commander
      * - TODO: Fix the spawn reference here...
      * @param {String[]} lootableTypes An array of FIND_* constants to locate.
      */
-    ProcessLootables(lootableTypes)
+    ProcessLootables(lootableTypes, roomName)
     {
-        var primarySpawn = Game.getObjectById(this.primarySpawnID);
+        var targetRoom = Game.rooms[roomName];
         
         for(var lootableTypeIndex in lootableTypes)
         {
             var lootableType = lootableTypes[lootableTypeIndex];
-            var lootables = primarySpawn.room.find(lootableType)
+            var lootables = targetRoom.find(lootableType)
 
             for(var x in lootables) 
             {
@@ -48,9 +48,9 @@ class ResourcingCommander extends Commander
                 var commandMatch = false;
                 var lootableID = lootable.id;
 
-                for(var y in primarySpawn.memory.resourcingCommandQueue)
+                for(var y in Memory.resourcingCommandQueue)
                 {
-                    var command = primarySpawn.memory.resourcingCommandQueue[y];
+                    var command = Memory.resourcingCommandQueue[y];
                     if(lootableID == command.collectFromID)
                     {
                         commandMatch = true;
@@ -73,37 +73,36 @@ class ResourcingCommander extends Commander
      */
     deleteInvalidCommands()
     {
-        var primarySpawn = Game.getObjectById(this.primarySpawnID);
-        for(var x in primarySpawn.memory.resourcingCommandQueue)
+        for(var x in Memory.resourcingCommandQueue)
         {
-            var command = primarySpawn.memory.resourcingCommandQueue[x];
+            var command = Memory.resourcingCommandQueue[x];
             var collectFromObject = Game.getObjectById(command.collectFromID);
 
             if(!collectFromObject)
             {
-                primarySpawn.memory.resourcingCommandQueue.splice(x,1);
+                Memory.resourcingCommandQueue.splice(x,1);
             }
         }
     }
 
     /**
-     * Pushes command to respective commander queue. Considering decoupling these queues from spawn memory and storing in root.
+     * Pushes command to respective commander queue.
      * @param {Command} command Command to be pushed to queue
      */
     SubmitCommand(command)
     {
-        this.primarySpawn.memory.resourcingCommandQueue.push(command);
+        Memory.resourcingCommandQueue.push(command);
     }
 
     /** 
-     * Ask the primary spawn to make a creep.
+     * Ask the primary spawn of the room to make a creep.
      * If the primary spawn is busy, check for secondary spawns.
      * If secondary spawns exist, request they spawn the creep.
      * If no work, go back through, add the creep to the shortest queue.
      */
-    RequestCreep(creep)
+    RequestCreep(creep, roomName)
     {
-        
+        var targetRoom = Game.rooms[roomName];
     }
 
     

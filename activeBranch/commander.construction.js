@@ -2,9 +2,9 @@ var Commander = require('commander.base');
 
 class ConstructionCommander extends Commander
 {
-    constructor(primarySpawnID, roomControllerID)
+    constructor()
     {
-        super("construction", primarySpawnID, roomControllerID)
+        super("construction")
     }
 
     /**
@@ -48,12 +48,12 @@ class ConstructionCommander extends Commander
     }
 
     /**
-     * Pushes command to respective commander queue. Considering decoupling these queues from spawn memory and storing in root.
+     * Pushes command to respective commander queue.
      * @param {Command} command Command to be pushed to queue
      */
     SubmitCommand(command)
     {
-        this.primarySpawn.memory.constructionCommandQueue.push(command);
+        Memory.constructionCommandQueue.push(command);
     }
 
     /** 
