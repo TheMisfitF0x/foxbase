@@ -34,6 +34,15 @@ if(!Creep.prototype.ExecuteTransferCommand)
             {
                 delete this.memory.command;
             }
+
+            if(!this.memory.command.delivering)
+            {
+                //Source from targetRoom
+            }
+            else if(this.transfer(targetObject, this.memory.command.resourceType) == ERR_NOT_IN_RANGE)
+            {
+                this.moveTo(targetObject);
+            }
         }
         
         if(!this.memory.command.isDelivery)
