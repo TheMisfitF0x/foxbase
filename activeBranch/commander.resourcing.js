@@ -33,34 +33,46 @@ class ResourcingCommander extends Commander
      * - TODO: Fix the spawn reference here...
      * @param {String[]} lootableTypes An array of FIND_* constants to locate.
      */
-    ProcessLootables(lootableTypes, roomName)
+    ProcessLootables(lootableTypes, roomName = "all")
     {
-        var targetRoom = Game.rooms[roomName];
-        
-        for(var lootableTypeIndex in lootableTypes)
+        if(roomName == "all")
         {
-            var lootableType = lootableTypes[lootableTypeIndex];
-            var lootables = targetRoom.find(lootableType)
-
-            for(var x in lootables) 
+            var targetRooms = Game.rooms;
+        }
+        else
+        {
+            var targetRooms = Game.rooms[roomName];
+        }
+        
+        for(var x in targetRooms)
+        {
+            var targetRoom = targetRooms[x]
+        
+            for(var lootableTypeIndex in lootableTypes)
             {
-                var lootable = lootables[x];
-                var commandMatch = false;
-                var lootableID = lootable.id;
+                var lootableType = lootableTypes[lootableTypeIndex];
+                var lootables = targetRoom.find(lootableType)
 
-                for(var y in Memory.resourcingCommandQueue)
+                for(var x in lootables) 
                 {
-                    var command = Memory.resourcingCommandQueue[y];
-                    if(lootableID == command.collectFromID)
+                    var lootable = lootables[x];
+                    var commandMatch = false;
+                    var lootableID = lootable.id;
+
+                    for(var y in Memory.resourcingCommandQueue)
                     {
-                        commandMatch = true;
-                        break; 
+                        var command = Memory.resourcingCommandQueue[y];
+                        if(lootableID == command.collectFromID)
+                        {
+                            commandMatch = true;
+                            break; 
+                        }
                     }
-                }
 
-                if(!commandMatch)
-                {
-                    this.IssueCommand(new TransferCommand(this.commanderName, lootableID));
+                    if(!commandMatch)
+                    {
+                        this.IssueCommand(new TransferCommand(this.commanderName, lootableID));
+                    }
                 }
             }
         }
