@@ -1,5 +1,6 @@
-var Commander = require('commander.base');
-var TransferCommand = require('command.transfer');
+require('commander.base');
+require('command.transfer');
+require('command.harvest');
 
 class ResourcingCommander extends Commander
 {
@@ -17,10 +18,11 @@ class ResourcingCommander extends Commander
     // }
 
     /**
-     * Check for the existence of dropped resources, ruins, or graves. 
-     * Send a transfer from those items to the nearest container/storage.
-     * Then, check for low towers, extensions, spawns.
-     * Send a transfer to those items from the nearest container/storage
+     * 1. Check for the existence of dropped resources, ruins, or graves. 
+     * 2. Send a transfer from those items to the nearest container/storage.
+     * 3. Then, check for low towers, extensions, spawns.
+     * 4. Send a transfer to those items from the nearest container/storage
+     * 5. Repeat per room visible.
      */
     Update()
     {
@@ -30,7 +32,6 @@ class ResourcingCommander extends Commander
 
     /**
      * Check for the existence of pools, graves, or ruins without commands. If one is found, add a command.
-     * - TODO: Fix the spawn reference here...
      * @param {String[]} lootableTypes An array of FIND_* constants to locate.
      */
     ProcessLootables(lootableTypes, roomName = "all")
@@ -111,8 +112,10 @@ class ResourcingCommander extends Commander
      * If the primary spawn is busy, check for secondary spawns.
      * If secondary spawns exist, request they spawn the creep.
      * If no work, go back through, add the creep to the shortest queue.
+     * @param {String} roomName The desired room to spawn the creep in.
+     * @param {boolean} [isHarv=false] If true, spawna harvester creep, else spawn a truck creep. 
      */
-    RequestCreep(creep, roomName)
+    RequestCreep(roomName, isHarv = false)
     {
         var targetRoom = Game.rooms[roomName];
     }

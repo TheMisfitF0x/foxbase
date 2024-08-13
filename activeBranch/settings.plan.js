@@ -10,6 +10,14 @@ var plan = [
             harvesterMode: "running",
             constructorMode: "dynamic",
             upgraderMode: "dynamic"
-        }
+        },
+        directives:
+        [
+            {
+                commander: "construction",
+                structure: "container",
+                number:"2"
+            }
+        ]
     }
 ]

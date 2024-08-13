@@ -17,7 +17,7 @@ class TransferCommand extends Command
      * @param {boolean} entireJob If isDelivery, should it keep delivering until the object is full? Else, should the creep keep looting until the item is empty? True by default.
      * @param {boolean} isDelivery If true, the target item should be restocked with energy, else energy should be removed. False by default.
      */
-    constructor(commanderName, roomName, targetID, resourceType = RESOURCE_ENERGY,entireJob = true, isDelivery = false)
+    constructor(commanderName, roomName, targetID, resourceType = RESOURCE_ENERGY, entireJob = true, isDelivery = false)
     {
         super(commanderName, "transfer")
         this.targetID = targetID;

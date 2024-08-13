@@ -1,17 +1,19 @@
 var bodyComps = require('settings.bodyComps');
+
+// TODO: These command requirements need to be removed when commanders are able to issue orders properly.
 var HarvestCommand = require('command.harvest');
 var UpgradeCommand = require('command.upgrade');
 var ConstructCommand = require('command.construct');
+
+// TODO: Add the combat Commander.
 var ConstructionCommander = require('commander.construction');
 var ResourcingCommander = require('commander.resourcing');
 require('protoMod.creep');
 require('protoMod.spawn');
 
 module.exports.loop = function () {
-    var newSpawnID = _.find(Game.structures, (o) => {return o.structureType == STRUCTURE_SPAWN}).id
-    var newRoomControllerID = Game.getObjectById(newSpawnID).room.controller.id;
-    var resourcingCommander = new ResourcingCommander(newSpawnID, newRoomControllerID);
-    var constructCommander = new ConstructionCommander(newSpawnID, newRoomControllerID);
+    var resourcingCommander = new ResourcingCommander();
+    var constructCommander = new ConstructionCommander();
 
     if(!Memory.initComplete)
     {
@@ -71,6 +73,7 @@ module.exports.loop = function () {
             { align: 'left', opacity: 0.8 });
     }
     
+    // TODO: This for loop needs to be simplified into calling creep.Execute() for every creep.
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
         switch(creep.memory.role){

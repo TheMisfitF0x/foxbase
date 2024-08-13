@@ -30,9 +30,12 @@ if(!Creep.prototype.DynamicSourcing)
     }
 }
 
-if(!Creep.prototype.StrictSourcing)
+if(!Creep.prototype.SetResourcingTarget)
 {
-    Creep.prototype.StrictSourcing = function()
+    /**
+     * 
+     */
+    Creep.prototype.SetResourcingTarget = function()
     {
         //TODO: Fill this out one day.
         console.log("Static sourcing not implemented, executing Dynamic sourcing");

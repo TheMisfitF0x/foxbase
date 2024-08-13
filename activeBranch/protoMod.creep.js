@@ -11,6 +11,8 @@ if(!Creep.prototype.VerifyCommand)
      * This function checks the creep's body against the task it is assigned
      * Returns true if able to execute command
      * False otherwise.
+     * @param {Command} command The command to verify against.
+     * @returns True if the creep has the necessary body parts to carry out the command. False otherwise.
      */
     Creep.prototype.VerifyCommand = function(command)
     {
@@ -61,6 +63,7 @@ if(!Creep.prototype.ReceiveCommand)
      * This function takes in a command and writes the contents of the command to the creep's memory.
      * For this reason, commands must always be serializable (no complex objects or game objects)
      * Use IDs to get references to game objects.
+     * @param {Command} command The command to write to memory.
      */
     Creep.prototype.ReceiveCommand = function(command)
     {

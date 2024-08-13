@@ -1,5 +1,10 @@
 class Command
 {
+    /**
+     * 
+     * @param {String} commanderName Name of issuing commander
+     * @param {String} commandType Type of command, determined by subclass of command spawned.
+     */
     constructor(commanderName, commandType)
     {
         if(!Memory.commandsCreated)

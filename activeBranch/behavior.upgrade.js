@@ -17,9 +17,6 @@ if(!Creep.prototype.ExecuteUpgradeCommand)
         }
         else if(this.memory.command.useDynamicSourcing)
             this.DynamicSourcing();
-        else
-            this.StrictSourcing();
-        
     }
 }
 
