@@ -1,6 +1,6 @@
 let Commander = require('commander.base');
-require('command.transfer');
-require('command.harvest');
+let TransferCommand = require('command.transfer');
+let HarvestCommand = require('command.harvest');
 
 class ResourcingCommander extends Commander
 {

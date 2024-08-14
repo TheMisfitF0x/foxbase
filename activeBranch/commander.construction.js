@@ -1,6 +1,6 @@
 let Commander = require('commander.base');
-require('command.construct');
-require('command.upgrade');
+let ConstructCommand = require('command.construct');
+let UpgradeCommand = require('command.upgrade');
 
 class ConstructionCommander extends Commander
 {
