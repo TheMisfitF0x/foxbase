@@ -3,7 +3,6 @@ require('behavior.transfer');
 require('behavior.upgrade');
 require('behavior.construct');
 require('behavior.sourcing');
-require('behavior.findEStorage');
 
 if(!Creep.prototype.VerifyCommand)
 {
