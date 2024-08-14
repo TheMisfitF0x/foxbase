@@ -1,4 +1,4 @@
-var Commander = require('commander.base');
+let Commander = require('commander.base');
 require('command.construct');
 require('command.upgrade');
 

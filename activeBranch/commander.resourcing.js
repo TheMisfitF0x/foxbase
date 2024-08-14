@@ -1,4 +1,4 @@
-require('commander.base');
+let Commander = require('commander.base');
 require('command.transfer');
 require('command.harvest');
 
