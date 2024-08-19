@@ -105,3 +105,25 @@ if(!Creep.prototype.Execute)
         }
     }
 }
+
+if(!Creep.prototype.DynamicMoveAndAction)
+{
+    /**
+     * This is a simple helper function that I'd like to attempt to use to simplify the state/strategy plans in the future, and cut down on code repeats. 
+     * I have no idea whether or not this will help or even work.
+     * 
+     * This function attempts the provided action, and will move the creep if not in range to perform the function.
+     * @param {Function} actionFunction The action the creep is to attempt to perform.
+     * @param {RoomObject} target The game object the creep is to perform the action on.
+     * @returns The error code provided by the action function.
+     */
+    Creep.prototype.DynamicMoveAndAction = function(actionFunction, target)
+    {
+        var returnCode = this.actionFunction(target)
+        if(returnCode == ERR_NOT_IN_RANGE)
+        {
+            this.moveTo(target);
+        }
+        return returnCode;
+    }
+}
