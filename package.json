@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@types/lodash": "^4.17.7",
+    "@types/screeps": "^3.3.8"
+  },
+  "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-cli": "^1.5.0",
+    "grunt-screeps": "^1.5.0"
+  }
+}

@@ -1,1 +1,0 @@
-This is a notepad. It has no bearing on the actual program, beyond being a place where I can place things and think about stuff that doesn't pertain to particular modules.
