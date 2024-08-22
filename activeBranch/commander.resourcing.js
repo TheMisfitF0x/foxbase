@@ -12,10 +12,10 @@ class ResourcingCommander extends Commander
     /**
      * What to do on first spawn
      */
-    // OnInit()
-    // {
-    //     super.OnInit()
-    // }
+    OnInit()
+    {
+        
+    }
 
     /**
      * 1. Check for the existence of dropped resources, ruins, or graves. 
