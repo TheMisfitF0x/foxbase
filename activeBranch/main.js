@@ -10,7 +10,7 @@ var ConstructionCommander = require('commander.construction');
 var ResourcingCommander = require('commander.resourcing');
 require('protoMod.creep');
 require('protoMod.spawn');
-
+//Test line
 module.exports.loop = function () {
     var resourcingCommander = new ResourcingCommander();
     var constructCommander = new ConstructionCommander();
