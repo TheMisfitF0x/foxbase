@@ -17,7 +17,7 @@ class ConstructionCommander extends Commander
     OnInit()
     {
         
-        this.PlotRoadToController(spawnID);
+        this.PlotRoadToController("nah");
     }
 
     /**

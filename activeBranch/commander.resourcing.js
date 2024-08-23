@@ -82,7 +82,8 @@ class ResourcingCommander extends Commander
     /**
      * This iterates through all commands in the respective command queue.
      * If any point to a container that does not exist, remove them.
-     * - TODO: Fix spawn reference...
+     * 
+     * TODO: Cases for harvest commands break this method. Fix.
      */
     deleteInvalidCommands()
     {
@@ -99,7 +100,7 @@ class ResourcingCommander extends Commander
     }
 
     /**
-     * Pushes command to respective commander queue.
+     * Pushes command to commander queue.
      * @param {Command} command Command to be pushed to queue
      */
     SubmitCommand(command)

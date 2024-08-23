@@ -4,7 +4,7 @@ require('behavior.upgrade');
 require('behavior.construct');
 require('behavior.sourcing');
 
-if(!Creep.prototype.VerifyCommand)
+if(!Creep.prototype.CanDoCommand)
 {
     /**
      * This function checks the creep's body against the task it is assigned
@@ -13,7 +13,7 @@ if(!Creep.prototype.VerifyCommand)
      * @param {Command} command The command to verify against.
      * @returns True if the creep has the necessary body parts to carry out the command. False otherwise.
      */
-    Creep.prototype.VerifyCommand = function(command)
+    Creep.prototype.CanDoCommand = function(command)
     {
         var baseBodiesNeeded = [];
         switch(command.commandType)
