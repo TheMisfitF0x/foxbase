@@ -1,4 +1,5 @@
 var plan = [
+    {},
     {
         creeps2Maintain:{
             workers: 4,
