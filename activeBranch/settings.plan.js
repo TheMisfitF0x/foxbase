@@ -16,8 +16,8 @@ var plan = [
         [
             {
                 commander: "construction",
-                structure: "container",
-                number:"2"
+                structure: STRUCTURE_CONTAINER,
+                number: 2
             }
         ]
     }

@@ -1,21 +1,14 @@
-/**
- * Base State Class for all states to interact with creep and store data to creep's memory.
- */
-class State {
-    /**
-     * Base state class
-     * @param {Creep} creep 
-     * @param {StateTypes} type 
-     */
-    constructor(creep, type)
+
+class SourcingState {
+    
+    constructor(creep)
     {
         this.creep = creep;
-        this.type = type;
     }
 
     Action()
     {
-        //Empty lol
+        //TODO: Move sourcing code here.
     }
 
     /**

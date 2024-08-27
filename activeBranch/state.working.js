@@ -1,21 +1,17 @@
 /**
  * Base State Class for all states to interact with creep and store data to creep's memory.
  */
-class State {
-    /**
-     * Base state class
-     * @param {Creep} creep 
-     * @param {StateTypes} type 
-     */
+class WorkingState {
+    
     constructor(creep, type)
     {
         this.creep = creep;
-        this.type = type;
+        
     }
 
     Action()
     {
-        //Empty lol
+        //TODO: Build Strategy pattern for working behaviors.
     }
 
     /**
@@ -27,12 +23,5 @@ class State {
         //If I remember correctly I can also do something like:
         //creep.memory.[varName] = this.var;
         //Might be neat.
-    }
-
-    static StateTypes = {
-        Moving: "moving",
-        Idling: "idling",
-        Working: "working",
-        Sourcing: "sourcing"
     }
 }
