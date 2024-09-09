@@ -11,11 +11,12 @@ class State {
     {
         this.creep = creep;
         this.type = type;
+        this.command = creep.memory.command;
     }
 
     Action()
     {
-        //Empty lol
+        console.log("Undefined state. Please use children state classes for instantiation.")
     }
 
     /**
@@ -36,3 +37,5 @@ class State {
         Sourcing: "sourcing"
     }
 }
+
+module.exports = State;

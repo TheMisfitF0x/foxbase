@@ -1,5 +1,6 @@
+const State = require("state.base");
 
-class SourcingState {
+class SourcingState extends State{
     
     constructor(creep)
     {
@@ -22,10 +23,5 @@ class SourcingState {
         //Might be neat.
     }
 
-    static StateTypes = {
-        Moving: "moving",
-        Idling: "idling",
-        Working: "working",
-        Sourcing: "sourcing"
-    }
+    
 }

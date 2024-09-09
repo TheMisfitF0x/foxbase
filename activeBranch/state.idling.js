@@ -1,4 +1,6 @@
-class IdlingState {
+const State = require("state.base");
+
+class IdlingState extends State{
     
     constructor(creep)
     {
@@ -9,6 +11,7 @@ class IdlingState {
     Action()
     {
         //TODO: Figure out if the creep needs to be doing anything here.
+        stateTypes
     }
 
     /**
@@ -22,10 +25,5 @@ class IdlingState {
         //Might be neat.
     }
 
-    static StateTypes = {
-        Moving: "moving",
-        Idling: "idling",
-        Working: "working",
-        Sourcing: "sourcing"
-    }
+    
 }

@@ -1,12 +1,10 @@
-/**
- * Base State Class for all states to interact with creep and store data to creep's memory.
- */
-class MovingState {
+const State = require("state.base");
+
+class MovingState extends State {
     
     constructor(creep)
     {
         this.creep = creep;
-        
     }
 
     Action()
@@ -23,12 +21,5 @@ class MovingState {
         //If I remember correctly I can also do something like:
         //creep.memory.[varName] = this.var;
         //Might be neat.
-    }
-
-    static StateTypes = {
-        Moving: "moving",
-        Idling: "idling",
-        Working: "working",
-        Sourcing: "sourcing"
     }
 }
