@@ -1,12 +1,14 @@
+const { StateTypes } = require("./state.base");
+
 /**
  * Base State Class for all states to interact with creep and store data to creep's memory.
  */
 class WorkingState {
     
-    constructor(creep, type)
+    constructor(creep)
     {
         this.creep = creep;
-        
+        this.type = StateTypes.Working;
     }
 
     Action()

@@ -1,10 +1,12 @@
 const State = require("state.base");
+const { StateTypes } = require("./state.base");
 
 class SourcingState extends State{
     
-    constructor(creep)
+    constructor(creep, targetSourceID)
     {
         this.creep = creep;
+        this.type = StateTypes.Sourcing;
     }
 
     Action()

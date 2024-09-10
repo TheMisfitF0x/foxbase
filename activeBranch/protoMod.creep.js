@@ -76,15 +76,18 @@ if(!Creep.prototype.Execute)
     /**
      * This function checks the command type of the command in the creep's memory, 
      * then executes the proper method to handle that command.
+     * 
+     * NOTE: This function will soon be replaced with a call to the creep's state-based action function.
+     * When in working state, action will be determined based on command, executing the proper behavior.
      */
-    Creep.prototype.Execute = function()
+    Creep.prototype.Execute = function() 
     {
         if(this.memory.command)
         {
             switch(this.memory.command.commandType)
             {
                 case "attack":
-                    //TODO: Figure out wtf the attack command entails lol
+                    //TODO: Figure out what the attack command entails lol
                     break;
                 case "transfer":
                     this.ExecuteTransferCommand();
