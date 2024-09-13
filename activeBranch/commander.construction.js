@@ -37,10 +37,10 @@ class ConstructionCommander extends Commander
      */
     PlotRoadToController(spawnID)
     {
-        var controllerPath = Game.spawns['Spawn1'].pos.findPathTo(Game.spawns['Spawn1'].room.controller);
-        for(var point in controllerPath)
+        let controllerPath = Game.spawns['Spawn1'].pos.findPathTo(Game.spawns['Spawn1'].room.controller);
+        for(let point in controllerPath)
         {
-            var pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns["Spawn1"].room.name);
+            let pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns["Spawn1"].room.name);
             pointPos.createConstructionSite(STRUCTURE_ROAD);
         }
         return controllerPath

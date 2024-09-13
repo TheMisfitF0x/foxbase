@@ -1,19 +1,19 @@
-var bodyComps = require('settings.bodyComps');
+const bodyComps = require('settings.bodyComps');
 
 // TODO: These command requirements need to be removed when commanders are able to issue orders properly.
-var HarvestCommand = require('command.harvest');
-var UpgradeCommand = require('command.upgrade');
-var ConstructCommand = require('command.construct');
+const HarvestCommand = require('command.harvest');
+const UpgradeCommand = require('command.upgrade');
+const ConstructCommand = require('command.construct');
 
 // TODO: Add the combat Commander.
-var ConstructionCommander = require('commander.construction');
-var ResourcingCommander = require('commander.resourcing');
+const ConstructionCommander = require('commander.construction');
+const ResourcingCommander = require('commander.resourcing');
 require('protoMod.creep');
 require('protoMod.spawn');
 //Test line
 module.exports.loop = function () {
-    var resourcingCommander = new ResourcingCommander();
-    var constructCommander = new ConstructionCommander();
+    let resourcingCommander = new ResourcingCommander();
+    let constructCommander = new ConstructionCommander();
 
     if(!Memory.initComplete)
     {
@@ -27,25 +27,25 @@ module.exports.loop = function () {
 
     resourcingCommander.Update();
     
-    for (var name in Memory.creeps) {
+    for (let name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
             console.log('Clearing non-existing creep memory:', name);
         }
     }
     
-    var harvs = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+    let harvs = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     if (harvs.length < Game.spawns["Spawn1"].room.find(FIND_SOURCES).length) {
-        var newName = 'Harv' + Game.time;
+        let newName = 'Harv' + Game.time;
         if(Game.spawns['Spawn1'].spawnCreep(bodyComps.HARV, newName, { memory: { role: 'harvester'} }) == OK)
             {
                 console.log('Spawning new harv: ' + newName);
             }
     }
 
-    var workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
+    let workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
     if (workers.length < 4 && harvs.length > 1) {
-        var newName = 'Worker' + Game.time;
+        let newName = 'Worker' + Game.time;
         if(Game.spawns['Spawn1'].spawnCreep(bodyComps.UPPER, newName, { memory: { role: 'worker', task: 'upgrade' } }) == OK)
         {
             console.log('Spawning new Worker: ' + newName);
@@ -53,10 +53,10 @@ module.exports.loop = function () {
         }
     }
 
-    var trucks = _.filter(Game.creeps, (creep) => creep.memory.type == 'truck');
+    let trucks = _.filter(Game.creeps, (creep) => creep.memory.type == 'truck');
     if(trucks.length < 2 && harvs.length > 1)
     {
-        var newName = 'Truck' + Game.time;
+        let newName = 'Truck' + Game.time;
         if(Game.spawns['Spawn1'].spawnCreep(bodyComps.SCAV, newName, {memory: {type: "truck"}}) == OK)
         {
             console.log('Spawning new Worker: ' + newName);
@@ -65,7 +65,7 @@ module.exports.loop = function () {
     }
     
     if (Game.spawns['Spawn1'].spawning) {
-        var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
+        let spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
             '🛠️' + spawningCreep.name,
             Game.spawns['Spawn1'].pos.x + 1,
@@ -74,8 +74,8 @@ module.exports.loop = function () {
     }
     
     // TODO: This for loop needs to be simplified into calling creep.Execute() for every creep.
-    for (var name in Game.creeps) {
-        var creep = Game.creeps[name];
+    for (let name in Game.creeps) {
+        let creep = Game.creeps[name];
         switch(creep.memory.role){
             case 'harvester':
                 if(creep.memory.command == null)

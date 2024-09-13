@@ -1,5 +1,5 @@
 const State = require("state.base");
-const { StateTypes } = require("./state.base");
+const { StateTypes } = require("state.base");
 
 class SourcingState extends State{
     

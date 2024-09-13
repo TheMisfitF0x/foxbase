@@ -20,13 +20,13 @@ class State {
     }
 
     /**
-     * Writes necessary variables pertaining to current state to creep's memory under "state" object.
+     * Writes necessary letiables pertaining to current state to creep's memory under "state" object.
      */
     LogState()
     {
-        //creep.memory.varName = this.varName;
+        //creep.memory.letName = this.letName;
         //If I remember correctly I can also do something like:
-        //creep.memory.[varName] = this.var;
+        //creep.memory.[letName] = this.let;
         //Might be neat.
     }
 

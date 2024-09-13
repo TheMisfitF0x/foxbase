@@ -15,7 +15,7 @@ if(!Creep.prototype.CanDoCommand)
      */
     Creep.prototype.CanDoCommand = function(command)
     {
-        var baseBodiesNeeded = [];
+        let baseBodiesNeeded = [];
         switch(command.commandType)
         {
             case "attack":
@@ -41,9 +41,9 @@ if(!Creep.prototype.CanDoCommand)
         }
 
         
-        for(var x in baseBodiesNeeded)
+        for(let x in baseBodiesNeeded)
         {
-            var bodyType = baseBodiesNeeded[x];
+            let bodyType = baseBodiesNeeded[x];
             if(!this.body.includes(bodyType))
             {
                 return false;
@@ -122,7 +122,7 @@ if(!Creep.prototype.DynamicMoveAndAction)
      */
     Creep.prototype.DynamicMoveAndAction = function(actionFunction, target)
     {
-        var returnCode = this.actionFunction(target)
+        let returnCode = this.actionFunction(target)
         if(returnCode == ERR_NOT_IN_RANGE)
         {
             this.moveTo(target);

@@ -1,5 +1,5 @@
-var plan = [
-    {},
+let plan = [
+    {}, //Haha empty so that I can start on RCL 1
     {
         creeps2Maintain:{
             workers: 4,
