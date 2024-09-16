@@ -20,7 +20,7 @@ Below is the plain-english process I want the creeps to follow. This is separate
   - Spawn and maintain 2 Constructors to begin constructing the plotted infrastructure.
 - **RCL 2:**
   - Plot infrastructure:
-  - 5 Extensions adjacent to the Controller Road, as close as possible to the spawn.
+    - 5 Extensions adjacent to the Controller Road, as close as possible to the spawn.
   - When containers are completed:
     - Order all Running Miners to act like Constructors.
     - Begin spawning and maintaining 1 Standing Miner per energy deposit.
