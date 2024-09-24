@@ -11,3 +11,5 @@ class AttackCommand extends Command
         this.homeSpawnID = homeSpawnID;
     }
 }
+
+module.exports = AttackCommand;
