@@ -10,11 +10,11 @@ if(!Creep.prototype.ExecuteHarvestCommand)
     }
 }
 //TODO: Refactor code to use commands
-var harvestBehavior = {
+let harvestBehavior = {
     runPosted: function(creep) 
     {
         //If not at assigned slot, go to slot.
-        var slot = new RoomPosition(creep.memory.targetSlot.x, creep.memory.targetSlot.y, creep.memory.targetSlot.roomName);
+        let slot = new RoomPosition(creep.memory.targetSlot.x, creep.memory.targetSlot.y, creep.memory.targetSlot.roomName);
         
         if(creep.pos.isEqualTo(slot) == false)
         {
@@ -44,7 +44,7 @@ var harvestBehavior = {
         
         if(creep.memory.harvest == true)
         {
-            var closeSource = creep.pos.findClosestByPath(FIND_SOURCES);
+            let closeSource = creep.pos.findClosestByPath(FIND_SOURCES);
             if(creep.harvest(closeSource) == ERR_NOT_IN_RANGE)
             {
                 creep.moveTo(closeSource)

@@ -4,7 +4,7 @@ require('behavior.upgrade');
 require('behavior.construct');
 require('behavior.sourcing');
 
-if(!Creep.prototype.VerifyCommand)
+if(!Creep.prototype.CanDoCommand)
 {
     /**
      * This function checks the creep's body against the task it is assigned
@@ -13,9 +13,9 @@ if(!Creep.prototype.VerifyCommand)
      * @param {Command} command The command to verify against.
      * @returns True if the creep has the necessary body parts to carry out the command. False otherwise.
      */
-    Creep.prototype.VerifyCommand = function(command)
+    Creep.prototype.CanDoCommand = function(command)
     {
-        var baseBodiesNeeded = [];
+        let baseBodiesNeeded = [];
         switch(command.commandType)
         {
             case "attack":
@@ -41,9 +41,9 @@ if(!Creep.prototype.VerifyCommand)
         }
 
         
-        for(var x in baseBodiesNeeded)
+        for(let x in baseBodiesNeeded)
         {
-            var bodyType = baseBodiesNeeded[x];
+            let bodyType = baseBodiesNeeded[x];
             if(!this.body.includes(bodyType))
             {
                 return false;
@@ -76,15 +76,18 @@ if(!Creep.prototype.Execute)
     /**
      * This function checks the command type of the command in the creep's memory, 
      * then executes the proper method to handle that command.
+     * 
+     * NOTE: This function will soon be replaced with a call to the creep's state-based action function.
+     * When in working state, action will be determined based on command, executing the proper behavior.
      */
-    Creep.prototype.Execute = function()
+    Creep.prototype.Execute = function() 
     {
         if(this.memory.command)
         {
             switch(this.memory.command.commandType)
             {
                 case "attack":
-                    //TODO: Figure out wtf the attack command entails lol
+                    //TODO: Figure out what the attack command entails lol
                     break;
                 case "transfer":
                     this.ExecuteTransferCommand();
@@ -119,7 +122,7 @@ if(!Creep.prototype.DynamicMoveAndAction)
      */
     Creep.prototype.DynamicMoveAndAction = function(actionFunction, target)
     {
-        var returnCode = this.actionFunction(target)
+        let returnCode = this.actionFunction(target)
         if(returnCode == ERR_NOT_IN_RANGE)
         {
             this.moveTo(target);

@@ -14,9 +14,7 @@ class Commander
     }
 
     /**
-     * This method will likely be split into its constituient parts per commander type. 
-     * The base implementation will be distribution to an available creep.
-     * Alternatively, commanders will receive submitCommand(command), which pushes it to queue.
+     * Commanders will receive submitCommand(command), which pushes it to queue.
      * TODO: In either case, this function needs implementation to send to an available creep.
      * @param {Command} command The command to be pushed to creep
      */

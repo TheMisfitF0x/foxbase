@@ -1,4 +1,4 @@
-var Command = require('command.base');
+const Command = require('command.base');
 
 class ConstructCommand extends Command
 {

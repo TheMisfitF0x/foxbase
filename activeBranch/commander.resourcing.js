@@ -1,6 +1,6 @@
-let Commander = require('commander.base');
-let TransferCommand = require('command.transfer');
-let HarvestCommand = require('command.harvest');
+const Commander = require('commander.base');
+const TransferCommand = require('command.transfer');
+const HarvestCommand = require('command.harvest');
 
 class ResourcingCommander extends Commander
 {
@@ -38,31 +38,31 @@ class ResourcingCommander extends Commander
     {
         if(roomName == "all")
         {
-            var targetRooms = Game.rooms;
+            let targetRooms = Game.rooms;
         }
         else
         {
-            var targetRooms = Game.rooms[roomName];
+            let targetRooms = Game.rooms[roomName];
         }
         
-        for(var x in targetRooms)
+        for(let x in targetRooms)
         {
-            var targetRoom = targetRooms[x]
+            let targetRoom = targetRooms[x]
         
-            for(var lootableTypeIndex in lootableTypes)
+            for(let lootableTypeIndex in lootableTypes)
             {
-                var lootableType = lootableTypes[lootableTypeIndex];
-                var lootables = targetRoom.find(lootableType)
+                let lootableType = lootableTypes[lootableTypeIndex];
+                let lootables = targetRoom.find(lootableType)
 
-                for(var x in lootables) 
+                for(let x in lootables) 
                 {
-                    var lootable = lootables[x];
-                    var commandMatch = false;
-                    var lootableID = lootable.id;
+                    let lootable = lootables[x];
+                    let commandMatch = false;
+                    let lootableID = lootable.id;
 
-                    for(var y in Memory.resourcingCommandQueue)
+                    for(let y in Memory.resourcingCommandQueue)
                     {
-                        var command = Memory.resourcingCommandQueue[y];
+                        let command = Memory.resourcingCommandQueue[y];
                         if(lootableID == command.collectFromID)
                         {
                             commandMatch = true;
@@ -82,14 +82,15 @@ class ResourcingCommander extends Commander
     /**
      * This iterates through all commands in the respective command queue.
      * If any point to a container that does not exist, remove them.
-     * - TODO: Fix spawn reference...
+     * 
+     * TODO: Cases for harvest commands break this method. Fix.
      */
     deleteInvalidCommands()
     {
-        for(var x in Memory.resourcingCommandQueue)
+        for(let x in Memory.resourcingCommandQueue)
         {
-            var command = Memory.resourcingCommandQueue[x];
-            var collectFromObject = Game.getObjectById(command.collectFromID);
+            let command = Memory.resourcingCommandQueue[x];
+            let collectFromObject = Game.getObjectById(command.collectFromID);
 
             if(!collectFromObject)
             {
@@ -99,7 +100,7 @@ class ResourcingCommander extends Commander
     }
 
     /**
-     * Pushes command to respective commander queue.
+     * Pushes command to commander queue.
      * @param {Command} command Command to be pushed to queue
      */
     SubmitCommand(command)
@@ -117,7 +118,7 @@ class ResourcingCommander extends Commander
      */
     RequestCreep(roomName, isHarv = false)
     {
-        var targetRoom = Game.rooms[roomName];
+        let targetRoom = Game.rooms[roomName];
     }
 
     

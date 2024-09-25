@@ -4,7 +4,7 @@ if(!Creep.prototype.ExecuteUpgradeCommand)
     {
         if (this.memory.upgrading)
         {
-            var targetController = Game.getObjectById(this.memory.command.roomControlID);
+            let targetController = Game.getObjectById(this.memory.command.roomControlID);
             if (this.upgradeController(targetController) == ERR_NOT_IN_RANGE)
             {
                 this.moveTo(targetController, { visualizePathStyle: { stroke: '#ffffff' } });

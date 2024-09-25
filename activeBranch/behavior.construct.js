@@ -10,7 +10,7 @@ if(!Creep.prototype.ExecuteConstructCommand)
     }
 
     //TODO: Refactor code to use commands
-var constructBehavior = 
+let constructBehavior = 
 {
     dynamicSourcing: function(creep)
     {
@@ -28,12 +28,12 @@ var constructBehavior =
 
         if (creep.memory.building)
         {
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+            let targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_TOWER);
                 }});
             
-            var backupTargets = creep.room.find(FIND_CONSTRUCTION_SITES);
+            let backupTargets = creep.room.find(FIND_CONSTRUCTION_SITES);
             if (targets.length)
             {
                 if (creep.build(targets[0]) == ERR_NOT_IN_RANGE)
