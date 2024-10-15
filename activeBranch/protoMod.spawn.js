@@ -7,7 +7,7 @@ if(!Spawn.prototype.AddCreep2Queue)
      */
     Spawn.prototype.AddCreep2Queue = function(creep)
     {
-        var additionSuccess = false;
+        let additionSuccess = false;
         return additionSuccess
     }
 }
