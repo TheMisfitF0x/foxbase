@@ -10,6 +10,7 @@ class HarvestStrategy extends Strategy
 
     Action()
     {
+        console.log("Harvest Action Taken");
         return this.creep.harvest(Game.getObjectById(this.targetID));
     }
 }

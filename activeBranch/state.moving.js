@@ -3,14 +3,15 @@ const { StateTypes } = require("state.base");
 require("protoMod.creep")
 class MovingState extends State {
     
-    constructor(creep, target, isMovingTowardTarget)
+    constructor(creep, targetID, isSourcingRun)
     {
         this.creep = creep;
+        this.command = this.creep.memory.command;
         this.type = StateTypes.Moving;
-        this.target = target;
-
+        this.target = Game.getObjectById(targetID);
+        this.isSourcingRun = isSourcingRun; 
         //This is ugly and temporary, will be fixed later.
-        if(isMovingTowardTarget && (creep.memory.command.commandType == "upgrade" || creep.memory.command.commandType == "build" || creep.memory.command.commandType == "repair"))
+        if(!this.isSourcingRun && (this.command.commandType == "upgrade" || this.command.commandType == "build" || this.command.commandType == "repair"))
         {
             this.actionRange = 3;
         }
@@ -21,8 +22,19 @@ class MovingState extends State {
 
     Action()
     {
-        
-        //TODO: Move movement code here
+        this.creep.moveTo(target);
+        if(this.creep.pos.getRangeTo(target) <= this.actionRange)
+        {
+            //Transition state? I really need to re-figure this one out.
+            this.ArrivedAtTarget()
+            console.log("I'm in range! Moving to new state.");
+        }
+    }
+
+    ArrivedAtTarget()
+    {
+        this.creep.memory.state = "working";
+        console.log("State set to 'working'");
     }
 
     /**
@@ -36,3 +48,5 @@ class MovingState extends State {
         //Might be neat.
     }
 }
+
+module.exports = MovingState;
