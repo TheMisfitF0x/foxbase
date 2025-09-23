@@ -36,6 +36,7 @@ class ResourcingCommander extends Commander
      */
     ProcessLootables(lootableTypes, roomName = "all")
     {
+        let targetRooms = null;
         if(roomName == "all")
         {
             let targetRooms = Game.rooms;

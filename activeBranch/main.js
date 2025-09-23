@@ -1,5 +1,5 @@
 const bodyComps = require('settings.bodyComps');
-
+//Lol wait does this still work?!
 // TODO: These command requirements need to be removed when commanders are able to issue orders properly.
 const HarvestCommand = require('command.harvest');
 const UpgradeCommand = require('command.upgrade');

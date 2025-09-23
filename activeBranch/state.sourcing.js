@@ -46,7 +46,7 @@ class SourcingState extends State{
         }
     }
 
-    FindAndSetTargetSource()
+    SetTargetSource()
     {
         this.creep.memory.state.sourceID = newTargetSourceID;
         this.targetSource = newTargetSource;
