@@ -39,11 +39,11 @@ class ResourcingCommander extends Commander
         let targetRooms = null;
         if(roomName == "all")
         {
-            let targetRooms = Game.rooms;
+            targetRooms = Game.rooms;
         }
         else
         {
-            let targetRooms = Game.rooms[roomName];
+            targetRooms = Game.rooms[roomName];
         }
         
         for(let x in targetRooms)
