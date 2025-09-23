@@ -31,7 +31,7 @@ class ResourcingCommander extends Commander
     }
 
     /**
-     * Check for the existence of pools, graves, or ruins without commands. If one is found, add a command.
+     * Check for the existence of defined resource sources without commands. If one is found, add a command.
      * @param {String[]} lootableTypes An array of FIND_* constants to locate.
      */
     ProcessLootables(lootableTypes, roomName = "all")
@@ -73,7 +73,7 @@ class ResourcingCommander extends Commander
 
                     if(!commandMatch)
                     {
-                        this.IssueCommand(new TransferCommand(this.commanderName, lootableID));
+                        this.SubmitCommand(new TransferCommand(this.commanderName, lootableID));
                     }
                 }
             }

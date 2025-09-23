@@ -16,8 +16,7 @@ class ConstructionCommander extends Commander
      */
     OnInit()
     {
-        
-        this.PlotRoadToController("nah");
+        this.PlotRoadToController(Memory.primarySpawn);
     }
 
     /**
@@ -37,10 +36,10 @@ class ConstructionCommander extends Commander
      */
     PlotRoadToController(spawnID)
     {
-        let controllerPath = Game.spawns['Spawn1'].pos.findPathTo(Game.spawns['Spawn1'].room.controller);
+        let controllerPath = Game.spawns[spawnID].pos.findPathTo(Game.spawns[spawnID].room.controller);
         for(let point in controllerPath)
         {
-            let pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns["Spawn1"].room.name);
+            let pointPos = new RoomPosition(controllerPath[point].x, controllerPath[point].y, Game.spawns[spawnID].room.name);
             pointPos.createConstructionSite(STRUCTURE_ROAD);
         }
         return controllerPath
