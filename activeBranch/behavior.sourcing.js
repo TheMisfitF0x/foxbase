@@ -2,7 +2,7 @@ if(!Creep.prototype.DynamicSourcing)
 {
     Creep.prototype.DynamicSourcing = function()
     {
-        var container = this.pos.findClosestByPath(FIND_STRUCTURES,{
+        let container = this.pos.findClosestByPath(FIND_STRUCTURES,{
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER) &&
                     structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
@@ -16,7 +16,7 @@ if(!Creep.prototype.DynamicSourcing)
         }
         else
         {
-            var sources = this.pos.findClosestByPath(FIND_SOURCES);
+            let sources = this.pos.findClosestByPath(FIND_SOURCES);
             if (this.harvest(sources) == ERR_NOT_IN_RANGE)
             {
                 this.moveTo(sources, { visualizePathStyle: { stroke: '#ffaa00' } });

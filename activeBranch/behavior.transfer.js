@@ -2,8 +2,8 @@ if(!Creep.prototype.ExecuteTransferCommand)
 {
     Creep.prototype.ExecuteTransferCommand = function()
     {
-        var targetObject = Game.getObjectById(this.memory.command.targetID);
-        var targetRoom = Game.rooms[this.memory.command.roomName];
+        let targetObject = Game.getObjectById(this.memory.command.targetID);
+        let targetRoom = Game.rooms[this.memory.command.roomName];
 
         if(this.memory.command.isDelivery)
         {
