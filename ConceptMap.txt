@@ -1,0 +1,48 @@
+---
+config:
+  theme: redux-dark-color
+---
+mindmap
+((FoxBase))
+  {{The Plan}}
+    How many creeps to spawn
+    When to expand
+    What to build per room
+  {{Creeps}}
+    [Prototype Modifications]
+      CanDoCommand
+      Commenece Tick
+      Receive Command
+      DynamicMoveAndAct
+    ))One Command at a time((
+    [States]
+      Moving
+      Idling
+      Sourcing
+      Working
+        [Strategies]
+          Construct
+          Harvest
+          Transfer
+          Upgrade
+  {{Commanders}}
+    [Responsibilites]
+      Command Creation
+      Situation Reaction
+      Enforcing "The Plan"
+    [Varieties]
+      ((Resourcing))
+        Source Harvesting
+        Scavenging
+        Recycling
+      ((Construction))
+        Expansion
+        Fortification
+      ((CrewChief))
+        Command Distribution
+        Workforce Replacement
+  {{Spawns}}
+    Blueprint Mapping
+    )Potential Nexus for Room Observation?(
+    Prototype Modifications
+      Spawn Queue

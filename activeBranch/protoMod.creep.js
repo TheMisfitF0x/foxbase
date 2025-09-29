@@ -1,8 +1,54 @@
+const TransferStrategy = require('./strat.transfer');
+
 require('behavior.harvest');
 require('behavior.transfer');
 require('behavior.upgrade');
 require('behavior.construct');
 require('behavior.sourcing');
+if(!Creep.prototype.CommenceTick)
+{
+    /**
+     * This function is run once per creep per tick, and kickstarts the whole process for the creep
+     * deciding what to do.
+     * 
+     * It starts by initiating the creep's state and strategies and then triggering execution of the 
+     * memorised command. Unless none exists, in which case it cries. What a loser.
+     */
+    Creep.prototype.CommenceTick = function()
+    {
+        if(this.memory.command)
+        {
+            this.creep.strategy = null;
+            switch(this.memory.command.commandType)
+            {
+                case "attack":
+                    //TODO: Figure out what the attack command entails lol
+                    break;
+                case "transfer":
+                    this.creep.strategy = new TransferStrategy(this,this.state, this.command.targetID);
+                    break;
+                case "upgrade":
+                    this.ExecuteUpgradeCommand();
+                    break;
+                case "harvest":
+                    this.ExecuteHarvestCommand();
+                    break;
+                case "construct":
+                    this.ExecuteConstructCommand();
+                    break;
+                default:
+                    console.log("No valid command loaded, command type is " + this.memory.command.commandType);
+                    break;
+            }
+
+            this.Execute();
+        }
+        else
+        {
+            this.say("WAAAAAA!")
+        }
+    }
+}
 
 if(!Creep.prototype.CanDoCommand)
 {
@@ -37,6 +83,7 @@ if(!Creep.prototype.CanDoCommand)
                 baseBodiesNeeded = [CLAIM, MOVE];
             default:
                 console.log("Cannot Verify, unknown or invalid command");
+                return false;
                 break;
         }
 
@@ -84,27 +131,7 @@ if(!Creep.prototype.Execute)
     {
         if(this.memory.command)
         {
-            switch(this.memory.command.commandType)
-            {
-                case "attack":
-                    //TODO: Figure out what the attack command entails lol
-                    break;
-                case "transfer":
-                    this.ExecuteTransferCommand();
-                    break;
-                case "upgrade":
-                    this.ExecuteUpgradeCommand();
-                    break;
-                case "harvest":
-                    this.ExecuteHarvestCommand();
-                    break;
-                case "construct":
-                    this.ExecuteConstructCommand();
-                    break;
-                default:
-                    console.log("No valid command loaded, command type is " + this.memory.command.commandType);
-                    break;
-            }
+            
         }
     }
 }
